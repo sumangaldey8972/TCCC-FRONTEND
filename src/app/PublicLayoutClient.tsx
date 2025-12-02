@@ -1,6 +1,7 @@
 "use client";
 
 import PublicNavbarVTwo from "@/components/landing/PublicNavbarVtwo";
+import Navbar from "@/components/navbar/Navbar";
 
 export default function PublicLayoutClient({
     children,
@@ -11,9 +12,8 @@ export default function PublicLayoutClient({
 
     return (
         <>
-            <PublicNavbarVTwo
-
-            />
+            {/* <PublicNavbarVTwo /> */}
+            <Navbar />
             <main className="min-h-screen">{children}</main>
         </>
     );
