@@ -133,7 +133,7 @@ export default function Home() {
       </div>
 
 
-      <Scroll3DPageSwap />
+      {/* <Scroll3DPageSwap /> */}
 
     </>
   );

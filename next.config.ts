@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "res.cloudinary.com", // ✅ allow Cloudinary
       },
+      {
+        protocol: "https",
+        hostname: "samdigitalsolutions.ae"
+      }
     ],
   },
 };

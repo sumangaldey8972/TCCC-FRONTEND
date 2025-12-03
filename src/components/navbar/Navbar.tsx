@@ -17,7 +17,7 @@ const Navbar = () => {
     const { theme, setTheme } = useTheme()
 
     const navItems = [
-        { label: "Become a publisher", href: "#" },
+        { label: "Become a publisher", href: "/become-a-publisher" },
         { label: "NFTs", href: "#" },
         { label: "Crypto Prediction", href: "#" },
         { label: "News | Blogs", href: "#" },
@@ -66,6 +66,7 @@ const Navbar = () => {
                             className="flex items-center space-x-3 group cursor-pointer"
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
+                            onClick={() => router.push("/")}
                         >
                             <motion.div
                                 whileHover={{ rotate: 360 }}
@@ -92,6 +93,7 @@ const Navbar = () => {
                                 <div
                                     key={item.label}
                                     className="relative dropdown"
+                                    onClick={() => router.replace(item.href)}
                                 >
                                     <button
                                         className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium text-[var(--foreground)] hover:text-[var(--primary)] hover:bg-[var(--primary)]/10 transition-all duration-200 group"
