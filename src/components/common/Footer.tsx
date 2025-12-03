@@ -131,7 +131,7 @@ export default function Footer() {
                                 </div>
                                 <div className="flex flex-col">
                                     <span className="text-text-primary font-medium text-sm group-hover:text-text-primary/90 transition-colors">
-                                        Sam Digital Solutions
+                                        Sam Digital Solutions UAE
                                     </span>
                                 </div>
                             </motion.a>

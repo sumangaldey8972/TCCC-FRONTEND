@@ -5,6 +5,8 @@ import { useFormik } from "formik"
 import * as Yup from "yup"
 import { motion } from "framer-motion"
 import { Loader2, CheckCircle, Eye, EyeOff, Sparkles, TrendingUp, Shield, Zap, DollarSign, Users, Clock, BarChart } from "lucide-react"
+import { SparklesCore } from "@/components/ui/sparkles"
+import { useTheme } from "@/providers/ThemeProvider"
 
 const Page = () => {
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -13,6 +15,8 @@ const Page = () => {
     const [submitSuccess, setSubmitSuccess] = useState(false)
     const formRef = useRef<HTMLDivElement>(null)
     const leftContentRef = useRef<HTMLDivElement>(null)
+
+    const { theme } = useTheme()
 
     // Pixel Animation Effect
     useEffect(() => {
@@ -139,6 +143,19 @@ const Page = () => {
 
     return (
         <div className="min-h-screen bg-background relative overflow-hidden">
+
+            <div className="w-full absolute inset-0 h-screen">
+                <SparklesCore
+                    id="tsparticlesfullpage"
+                    background="transparent"
+                    minSize={0.6}
+                    maxSize={1.4}
+                    particleDensity={50}
+                    className="w-full h-full"
+                    particleColor={theme === "light" ? "#000000" : "#FFFFFF"}
+                />
+            </div>
+
             {/* Pixel Grid Background Animation */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="pixel-grid-container absolute inset-0 grid grid-cols-15 grid-rows-15 gap-0.5 p-1" />

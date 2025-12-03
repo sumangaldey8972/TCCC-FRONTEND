@@ -21,7 +21,7 @@ const Navbar = () => {
         { label: "NFTs", href: "#" },
         { label: "Crypto Prediction", href: "#" },
         { label: "News | Blogs", href: "#" },
-        { label: "Tokenomics", href: "#" },
+        { label: "Tokenomics", href: "/tokenomics" },
     ];
 
     const toggleTheme = () => {
