@@ -2,7 +2,7 @@
 
 import RightSideNewsSection from "@/components/landing/RightSideNewsSection";
 import Scroll3DPageSwap from "@/components/landing/Scroll3DPageSwap";
-import { DottedMap } from "@/components/ui/dotted-map";
+import DottedMapExtreme from "@/components/ui/dotted-map";
 import { FaTelegramPlane, FaDiscord, FaArrowRight } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
@@ -33,8 +33,8 @@ export default function Home() {
       <div className="relative min-h-screen overflow-hidden">
 
         {/* Background */}
-        <div className="absolute inset-0 -z-10 opacity-50 -top-30">
-          <DottedMap />
+        <div className="absolute inset-0 -z-10 opacity-30 -top-30">
+          <DottedMapExtreme />
         </div>
 
         {/* Hero Content */}
@@ -46,7 +46,7 @@ export default function Home() {
               <h1 className="text-5xl font-light leading-tight tracking-tight">
                 <span className="gold-embossed">The Coin Cartel Club —</span>
                 <br />
-                <span className="text-text-primary/70 font-thinner">
+                <span className="text-text-primary font-thinner">
                   Your Gateway to Crypto News, Advertising & Growth
                 </span>
               </h1>
@@ -56,7 +56,7 @@ export default function Home() {
               Join the Cartel and maximize your reach in the crypto ecosystem.
             </p>
 
-            <p className="text-lg md:text-xl font-medium text-text-primary/80">
+            <p className="text-lg md:text-xl font-medium text-text-primary">
               Your Gateway to Crypto Media & Market Intelligence.
             </p>
 
@@ -69,7 +69,7 @@ export default function Home() {
                 <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </button>
 
-              <button className="group relative overflow-hidden px-6 py-4 text-base font-medium border-2 border-text-primary/30 text-text-primary rounded-lg transition-all duration-300 ease-out hover:scale-[1.02] active:scale-95 hover:border-text-primary/60 hover:bg-text-primary/5">
+              <button className="bg-background group relative overflow-hidden px-6 py-4 text-base font-medium border-2 border-text-primary/30 text-text-primary rounded-lg transition-all duration-300 ease-out hover:scale-[1.02] active:scale-95 hover:border-text-primary/60 hover:bg-background/90">
                 <span className="relative z-10">ADVERTISE YOUR TOKEN WITH US</span>
               </button>
             </div>
