@@ -26,7 +26,7 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning >
       <body
-        className={`${inter.variable} min-h-screen bg-background transition-colors`}
+        className={`${inter.variable} bg-background transition-colors`}
       >
         <ThemeProvider>
           <ReduxProvider>

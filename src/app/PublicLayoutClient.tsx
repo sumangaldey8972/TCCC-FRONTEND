@@ -15,7 +15,7 @@ export default function PublicLayoutClient({
         <>
             {/* <PublicNavbarVTwo /> */}
             <Navbar />
-            <main className="min-h-screen">{children}</main>
+            <main>{children}</main>
             <Footer />
         </>
     );

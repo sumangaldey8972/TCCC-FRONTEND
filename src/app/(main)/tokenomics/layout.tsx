@@ -14,7 +14,7 @@ export default function MainLayout({
 }) {
 
     return (
-        <div className="flex h-screen overflow-hidden">
+        <div className="flex overflow-hidden">
             <div className="flex-1 flex flex-col overflow-hidden">
                 {/* Conditional Rendering */}
                 <main className="flex-1 overflow-y-auto">

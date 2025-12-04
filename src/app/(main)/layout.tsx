@@ -6,16 +6,10 @@ export default function MainLayout({
 }) {
 
     return (
-        <div className="flex h-screen overflow-hidden">
-            <div className="flex-1 flex flex-col overflow-hidden">
-                {/* Navbar */}
-                {/* <Navbar className="sticky top-0 z-50" /> */}
-
-                {/* Conditional Rendering */}
-                <main className="flex-1 overflow-y-auto px-6 py-4 pb-[env(safe-area-inset-bottom)]">
-                    {children}
-                </main>
-            </div>
+        <div className="flex overflow-hidden">
+            <main className="flex-1 overflow-y-auto">
+                {children}
+            </main>
         </div>
     );
 }

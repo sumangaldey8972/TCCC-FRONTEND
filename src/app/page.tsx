@@ -3,10 +3,14 @@
 import RightSideNewsSection from "@/components/landing/RightSideNewsSection";
 import Scroll3DPageSwap from "@/components/landing/Scroll3DPageSwap";
 import DottedMapExtreme from "@/components/ui/dotted-map";
+import { useRouter } from "next/navigation";
 import { FaTelegramPlane, FaDiscord, FaArrowRight } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
 export default function Home() {
+
+  const router = useRouter()
+
   const socialLinks = [
     {
       name: "Telegram",
@@ -61,7 +65,7 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full max-w-2xl">
-              <button className="group relative overflow-hidden px-6 py-4 text-base font-medium bg-text-primary/90 text-background rounded-lg transition-all duration-300 ease-out hover:scale-[1.02] active:scale-95 shadow-lg hover:shadow-xl">
+              <button onClick={() => router.push("/consult-with-us")} className="group relative overflow-hidden px-6 py-4 text-base font-medium bg-text-primary/90 text-background rounded-lg transition-all duration-300 ease-out hover:scale-[1.02] active:scale-95 shadow-lg hover:shadow-xl">
                 <span className="relative z-10 flex items-center justify-center gap-2">
                   CONSULT WITH US
                   <FaArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -70,7 +74,7 @@ export default function Home() {
               </button>
 
               <button className="bg-background group relative overflow-hidden px-6 py-4 text-base font-medium border-2 border-text-primary/30 text-text-primary rounded-lg transition-all duration-300 ease-out hover:scale-[1.02] active:scale-95 hover:border-text-primary/60 hover:bg-background/90">
-                <span className="relative z-10">ADVERTISE YOUR TOKEN WITH US</span>
+                <span className="relative z-10">ADVERTISE WITH US</span>
               </button>
             </div>
 
