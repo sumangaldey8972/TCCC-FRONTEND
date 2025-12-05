@@ -17,7 +17,7 @@ const Navbar = () => {
     const { theme, setTheme } = useTheme()
 
     const navItems = [
-        { label: "Become a publisher", href: "/become-a-publisher" },
+        { label: "Become a Publisher", href: "/become-a-publisher" },
         { label: "NFTs", href: "#" },
         { label: "Crypto Prediction", href: "#" },
         { label: "News | Blogs", href: "#" },
@@ -148,6 +148,7 @@ const Navbar = () => {
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}
                                         className="px-4 py-2 rounded-lg text-sm font-medium hover:text-[var(--primary)] transition-colors duration-200"
+                                        onClick={() => router.push("/auth/log-in")}
                                     >
                                         Login
                                     </motion.button>
