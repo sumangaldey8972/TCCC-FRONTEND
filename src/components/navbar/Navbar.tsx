@@ -17,7 +17,7 @@ const Navbar = () => {
     const { theme, setTheme } = useTheme()
 
     const navItems = [
-        { label: "Become a Publisher", href: "/become-a-publisher" },
+        { label: "Publisher", href: "/become-a-publisher" },
         { label: "NFTs", href: "#" },
         { label: "Crypto Prediction", href: "#" },
         { label: "News | Blogs", href: "#" },
