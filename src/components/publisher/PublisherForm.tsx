@@ -35,6 +35,7 @@ const PublisherForm = forwardRef<HTMLDivElement, PublisherFormProps>(({
         website: "",
         description: "",
         profileLink: "",
+        verificationToken: ""
     })
 
     // Errors state

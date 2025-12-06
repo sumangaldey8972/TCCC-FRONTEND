@@ -8,6 +8,7 @@ export interface FormData {
     website: string
     description: string
     profileLink: string
+    verificationToken: string
 }
 
 export interface Errors {

@@ -1,9 +1,10 @@
 "use client"
 
 import { motion, AnimatePresence } from "framer-motion"
-import { Smartphone, MessageSquare, Globe, User, Building, Link as LinkIcon } from "lucide-react"
+import { Smartphone, Globe, User, Building, Link as LinkIcon } from "lucide-react"
 import { handleInputChange } from "./utils"
 import { Step1BasicInfoProps } from "@/type/publisher.type"
+import { FaTelegramPlane } from "react-icons/fa"
 
 const Step1BasicInfo = ({ formData, errors, setFormData, setErrors }: Step1BasicInfoProps) => {
     const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -204,7 +205,7 @@ const Step1BasicInfo = ({ formData, errors, setFormData, setErrors }: Step1Basic
                 </label>
                 <div className="relative">
                     <div className="absolute left-3 top-1/2 -translate-y-1/2">
-                        <MessageSquare className="w-5 h-5 text-text-primary/40" />
+                        <FaTelegramPlane className="w-5 h-5 text-text-primary/40" />
                     </div>
                     <input
                         type="text"
