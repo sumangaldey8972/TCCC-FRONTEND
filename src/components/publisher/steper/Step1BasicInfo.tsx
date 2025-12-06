@@ -59,7 +59,7 @@ const Step1BasicInfo = ({ formData, errors, setFormData, setErrors }: Step1Basic
                                 className="sr-only"
                             />
                             <div className="flex items-start gap-3">
-                                <div className={`hidden md:block w-10 h-10 rounded-lg flex items-center justify-center ${formData.accountType === type.id
+                                <div className={`hidden md:flex w-10 h-10 rounded-lg flex items-center justify-center ${formData.accountType === type.id
                                     ? 'bg-blue-500/20 text-blue-500'
                                     : 'bg-text-primary/10 text-text-primary/40'}`}
                                 >
