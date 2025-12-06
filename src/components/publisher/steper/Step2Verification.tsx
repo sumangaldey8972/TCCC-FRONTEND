@@ -227,11 +227,11 @@ const Step2Verification = ({
                                     <div className="space-y-3">
                                         <div className="relative">
                                             <div className="p-3 bg-[#1a1a1a] text-green-400/90 rounded-lg text-xs font-mono border border-green-500/20">
-                                                {`<meta name="coin-cartel-verification" content="${verificationToken}" />`}
+                                                {`<meta name="the-coin-cartel" content="${verificationToken}" />`}
                                             </div>
                                             <button
                                                 onClick={() => {
-                                                    const meta = `<meta name="coin-cartel-verification" content="${verificationToken}" />`;
+                                                    const meta = `<meta name="the-coin-cartel" content="${verificationToken}" />`;
                                                     navigator.clipboard.writeText(meta);
                                                     setCopiedMeta(true);
                                                     setTimeout(() => setCopiedMeta(false), 2000);
@@ -280,12 +280,12 @@ const Step2Verification = ({
                                     <div className="space-y-3">
                                         <div className="relative">
                                             <div className="p-3 bg-[#1a1a1a] text-purple-400/90 rounded-lg text-xs font-mono border border-purple-500/20">
-                                                {`coin-cartel-verification = ${verificationToken}`}
+                                                {`the-coin-cartel = ${verificationToken}`}
                                             </div>
                                             <div className="absolute top-2 right-2 flex gap-2">
                                                 <button
                                                     onClick={() => {
-                                                        const dns = `coin-cartel-verification = ${verificationToken}`;
+                                                        const dns = `the-coin-cartel = ${verificationToken}`;
                                                         navigator.clipboard.writeText(dns);
                                                         setCopiedDNS(true);
                                                         setTimeout(() => setCopiedDNS(false), 2000);
@@ -306,12 +306,12 @@ const Step2Verification = ({
                                                 </button>
                                                 <button
                                                     onClick={() => {
-                                                        const txtContent = `coin-cartel-verification=${verificationToken}`;
+                                                        const txtContent = `the-coin-cartel=${verificationToken}`;
                                                         const blob = new Blob([txtContent], { type: "text/plain" });
                                                         const url = URL.createObjectURL(blob);
                                                         const a = document.createElement("a");
                                                         a.href = url;
-                                                        a.download = "coin-cartel-verification.txt";
+                                                        a.download = "the-coin-cartel.txt";
                                                         a.click();
                                                         URL.revokeObjectURL(url);
                                                     }}
