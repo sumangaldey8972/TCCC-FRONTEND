@@ -159,7 +159,7 @@ const Step2Verification = ({
                                 <AlertCircle className="w-5 h-5 text-amber-500" />
                                 <div>
                                     <p className="font-medium text-amber-600">Verification Skipped</p>
-                                    <p className="text-sm text-amber-600/70 mt-1">
+                                    <p className="text-xxs text-amber-600/70 mt-1">
                                         You can verify your website later from your publisher dashboard.
                                     </p>
                                 </div>
@@ -175,7 +175,7 @@ const Step2Verification = ({
                                     type="button"
                                     onClick={verifyWebsite}
                                     disabled={isSubmitting}
-                                    className="py-3 px-4 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 disabled:opacity-50 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-blue-500/30 flex items-center justify-center gap-2"
+                                    className="text-sm py-3 px-4 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 disabled:opacity-50 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-blue-500/30 flex items-center justify-center gap-2"
                                 >
                                     <Globe className="w-4 h-4" />
                                     Verify Now
@@ -184,7 +184,7 @@ const Step2Verification = ({
                                 <button
                                     type="button"
                                     onClick={skipVerification}
-                                    className="py-3 px-4 border border-text-primary/20 hover:border-text-primary/40 text-text-primary/70 font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-text-primary/20 flex items-center justify-center gap-2"
+                                    className="text-sm py-3 px-4 border border-text-primary/20 hover:border-text-primary/40 text-text-primary/70 font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-text-primary/20 flex items-center justify-center gap-2"
                                 >
                                     <SkipForward className="w-4 h-4" />
                                     Skip Verification
@@ -196,7 +196,7 @@ const Step2Verification = ({
                             <button
                                 type="button"
                                 disabled
-                                className="col-span-2 py-3 px-4 bg-blue-500/50 text-white font-medium rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
+                                className="text-sm col-span-2 py-3 px-4 bg-blue-500/50 text-white font-medium rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
                             >
                                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                                 Verifying...
@@ -208,7 +208,7 @@ const Step2Verification = ({
                                 type="button"
                                 onClick={handleSubmit}
                                 disabled={isSubmitting}
-                                className="col-span-2 py-3 px-4 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 disabled:opacity-50 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-green-500/30 flex items-center justify-center gap-2"
+                                className="text-sm col-span-2 py-3 px-4 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 disabled:opacity-50 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-green-500/30 flex items-center justify-center gap-2"
                             >
                                 {isSubmitting ? (
                                     <>
@@ -216,10 +216,10 @@ const Step2Verification = ({
                                         Submitting...
                                     </>
                                 ) : (
-                                    <>
+                                    <span className="text-sm" >
                                         <CheckCircle className="w-4 h-4" />
-                                        Submit Application
-                                    </>
+                                        Submit Applications
+                                    </span>
                                 )}
                             </button>
                         )}
@@ -231,10 +231,10 @@ const Step2Verification = ({
                         <div className="flex items-center gap-3">
                             <AlertCircle className="w-5 h-5 text-blue-500 flex-shrink-0" />
                             <div>
-                                <p className="text-sm text-text-primary/80">
+                                <p className="text-xs text-text-primary/80">
                                     You haven't provided a website URL. You can submit your application directly.
                                 </p>
-                                <p className="text-sm text-text-primary/60 mt-1">
+                                <p className="text-xxs text-text-primary/60 mt-1">
                                     You can add a website later from your publisher dashboard.
                                 </p>
                             </div>
@@ -245,7 +245,7 @@ const Step2Verification = ({
                         type="button"
                         onClick={handleSubmit}
                         disabled={isSubmitting}
-                        className="w-full py-3 px-4 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 disabled:opacity-50 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-green-500/30 flex items-center justify-center gap-2"
+                        className="text-sm w-full py-3 px-4 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 disabled:opacity-50 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-green-500/30 flex items-center justify-center gap-2"
                     >
                         {isSubmitting ? (
                             <>

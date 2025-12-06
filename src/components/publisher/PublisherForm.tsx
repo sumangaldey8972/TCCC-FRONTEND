@@ -141,12 +141,9 @@ const PublisherForm = forwardRef<HTMLDivElement, PublisherFormProps>(({
             <div className="relative p-0.5 rounded-2xl bg-gradient-to-r from-text-primary/20 via-text-primary/40 to-text-primary/20 animate-gradient-x">
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-text-primary/10 to-transparent animate-shine" />
 
-                <div className="relative bg-background/90 backdrop-blur-sm rounded-2xl p-8 border border-text-primary/10">
+                <div className="relative bg-background/90 backdrop-blur-sm rounded-2xl p-4 md:p-8 border border-text-primary/10">
                     {/* Form Header */}
-                    <div className="text-center mb-8">
-                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-500/20 to-blue-600/10 mb-4">
-                            <Mail className="w-8 h-8 text-blue-500/80" />
-                        </div>
+                    <div className="text-center mb-4">
                         <h2 className="text-2xl font-semibold text-text-primary/80 mb-2">
                             Publisher Application
                         </h2>
@@ -170,7 +167,7 @@ const PublisherForm = forwardRef<HTMLDivElement, PublisherFormProps>(({
                                 type="button"
                                 onClick={prevStep}
                                 disabled={currentStep === 1 || isSubmitting}
-                                className="px-6 py-3 border border-text-primary/20 hover:border-text-primary/40 disabled:opacity-50 disabled:cursor-not-allowed text-text-primary/70 font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-text-primary/20 flex items-center gap-2"
+                                className="text-sm px-6 py-3 border border-text-primary/20 hover:border-text-primary/40 disabled:opacity-50 disabled:cursor-not-allowed text-text-primary/70 font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-text-primary/20 flex items-center gap-2"
                             >
                                 <ArrowLeft className="w-4 h-4" />
                                 Previous
@@ -181,7 +178,7 @@ const PublisherForm = forwardRef<HTMLDivElement, PublisherFormProps>(({
                                     type="button"
                                     onClick={nextStep}
                                     disabled={isSubmitting}
-                                    className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-blue-500/30 flex items-center gap-2"
+                                    className="text-sm px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-blue-500/30 flex items-center gap-2"
                                 >
                                     Next
                                     <ArrowRight className="w-4 h-4" />

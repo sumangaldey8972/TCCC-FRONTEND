@@ -37,7 +37,7 @@ const Step1BasicInfo = ({ formData, errors, setFormData, setErrors }: Step1Basic
                 <label className="block text-sm font-semibold text-text-primary/80 mb-3">
                     Account Type *
                 </label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 md:grid-cols-2 gap-3">
                     {[
                         { id: "individual", label: "Individual", icon: User, description: "Personal account" },
                         { id: "company", label: "Company", icon: Building, description: "Business account" }
@@ -46,7 +46,7 @@ const Step1BasicInfo = ({ formData, errors, setFormData, setErrors }: Step1Basic
                             key={type.id}
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
-                            className={`relative p-4 border rounded-xl cursor-pointer transition-all ${formData.accountType === type.id
+                            className={`relative p-2 md:p-4 border rounded-xl cursor-pointer transition-all ${formData.accountType === type.id
                                 ? 'border-blue-500 bg-blue-500/5 ring-2 ring-blue-500/20'
                                 : 'border-text-primary/20 hover:border-text-primary/40'}`}
                         >
@@ -59,15 +59,15 @@ const Step1BasicInfo = ({ formData, errors, setFormData, setErrors }: Step1Basic
                                 className="sr-only"
                             />
                             <div className="flex items-start gap-3">
-                                <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${formData.accountType === type.id
+                                <div className={`hidden md:block w-10 h-10 rounded-lg flex items-center justify-center ${formData.accountType === type.id
                                     ? 'bg-blue-500/20 text-blue-500'
                                     : 'bg-text-primary/10 text-text-primary/40'}`}
                                 >
                                     <type.icon className="w-5 h-5" />
                                 </div>
                                 <div className="flex-1">
-                                    <div className="font-medium text-text-primary/80">{type.label}</div>
-                                    <div className="text-sm text-text-primary/50 mt-1">{type.description}</div>
+                                    <div className="text-base font-medium text-text-primary/80">{type.label}</div>
+                                    <div className="hidden md:block text-sm text-text-primary/50 mt-1">{type.description}</div>
                                 </div>
                                 <div className={`w-5 h-5 mt-0.5 rounded-full border-2 flex items-center justify-center ${formData.accountType === type.id
                                     ? 'border-blue-500 bg-blue-500'
