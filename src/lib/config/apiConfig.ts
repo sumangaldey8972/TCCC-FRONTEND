@@ -1,4 +1,11 @@
 type ApiEndPoints = {
+    auth: {
+        signIn: string;
+        signUp: string;
+        verifyOtp: string;
+        resendOtp: string;
+        forgotPassword: string
+    },
     wallets: {
         add: string
     },
@@ -34,11 +41,18 @@ type ApiEndPoints = {
     }
 }
 
-export const BASE_API_URL = "https://api.thecoincartel.club/"
-// export const BASE_API_URL = "http://localhost:8080/"
+// export const BASE_API_URL = "https://api.thecoincartel.club/"
+export const BASE_API_URL = "http://localhost:8080/"
 // 
 
 export const API_ENDPOINTS: ApiEndPoints = {
+    auth: {
+        signIn: "/auth/sign-in",
+        signUp: "/auth/sign-up",
+        verifyOtp: "/auth/verify-otp",
+        resendOtp: "/auth/resend-otp",
+        forgotPassword: "/auth/forgot-password"
+    },
     wallets: {
         add: "/wallet/add"
     },

@@ -3,6 +3,7 @@
 import RightSideNewsSection from "@/components/landing/RightSideNewsSection";
 import Scroll3DPageSwap from "@/components/landing/Scroll3DPageSwap";
 import DottedMapExtreme from "@/components/ui/dotted-map";
+import { useAppSelector } from "@/store/hooks/hooks";
 import { useRouter } from "next/navigation";
 import { FaTelegramPlane, FaDiscord, FaArrowRight } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
@@ -31,6 +32,11 @@ export default function Home() {
       color: "hover:text-[#5865F2] hover:border-[#5865F2]",
     }
   ];
+
+
+  const user = useAppSelector((store) => store.auth.user)
+
+  console.log({ user })
 
   return (
     <>
@@ -81,7 +87,7 @@ export default function Home() {
           </div>
 
           {/* Right Section */}
-          <div className="h-auto lg:h-full w-full flex items-center justify-center">
+          <div className="h-auto lg:h-full w-full flex">
             <RightSideNewsSection />
           </div>
 

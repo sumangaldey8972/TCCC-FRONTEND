@@ -1,11 +1,13 @@
 "use client"
 
 import { useState, useRef } from "react"
-import { useFormik } from "formik"
+import { Formik, useFormik } from "formik"
 import * as Yup from "yup"
 import { motion, AnimatePresence } from "framer-motion"
 import { Loader2, CheckCircle, Mail, Key, Lock, ArrowLeft, Shield } from "lucide-react"
 import { useRouter } from "next/navigation"
+import appClient from "@/lib/appClient"
+import { toastLoading, toastUpdate } from "@/app/utils/toast-message"
 
 const Page = () => {
     const router = useRouter()
@@ -29,23 +31,28 @@ const Page = () => {
         }),
         onSubmit: async (values) => {
             setIsSubmitting(true)
+            const toastId = toastLoading("Sending OTP...", {
+                description: "Sending OTP for verification"
+            })
             try {
                 // Simulate API call to send OTP
-                await new Promise(resolve => setTimeout(resolve, 1000))
-                console.log("OTP sent to:", values.email)
-                setStep(2)
 
-                // Start resend cooldown
-                setResendCooldown(30)
-                const interval = setInterval(() => {
-                    setResendCooldown((prev) => {
-                        if (prev <= 1) {
-                            clearInterval(interval)
-                            return 0
-                        }
-                        return prev - 1
+
+                const response = await appClient.post("/api/auth/resend-otp", { email: values.email })
+
+                if (response.data.status) {
+                    console.log("OTP sent to:", values.email)
+                    toastUpdate(toastId, "success", "OTP send to your email", {
+                        description: response.data.message
                     })
-                }, 1000)
+                    setStep(2)
+                    setResendCooldown(120)
+                } else {
+                    toastUpdate(toastId, "warning", "", {
+                        description: response.data.message
+                    })
+                }
+
             } catch (error) {
                 console.error("Error sending OTP:", error)
             } finally {
@@ -67,10 +74,10 @@ const Page = () => {
             otpInputRefs.current[index + 1]?.focus()
         }
 
-        // Auto-submit if all digits filled
-        if (newOtp.every(digit => digit !== "") && index === 5) {
-            verifyOtp()
-        }
+        // // Auto-submit if all digits filled
+        // if (newOtp.every(digit => digit !== "") && index === 6) {
+        //     verifyOtp()
+        // }
     }
 
     const handleKeyDown = (index: number, e: React.KeyboardEvent) => {
@@ -81,19 +88,36 @@ const Page = () => {
 
     const verifyOtp = async () => {
         setIsSubmitting(true)
+        const toastId = toastLoading("Checking...", {
+            description: "Checking your otp, please wait"
+        })
         try {
             // Simulate OTP verification
-            await new Promise(resolve => setTimeout(resolve, 800))
             const otpString = otp.join("")
 
-            // Mock verification logic
-            if (otpString.length === 6 && /^\d+$/.test(otpString)) {
+            const payload = {
+                email: emailFormik.values.email,
+                otp: otpString
+            }
+
+            const response = await appClient.post("/api/auth/verify-otp", payload)
+            console.log("response", response)
+            if (response.data.status) {
+
+                toastUpdate(toastId, "success", "Verification successfull", {
+                    description: response.data.message || "Signed in,"
+                })
+
                 setOtpVerified(true)
                 setStep(3)
             } else {
-                // In real app, show error
-                console.log("Invalid OTP")
+                toastUpdate(toastId, "warning", "", {
+                    description: response.data.message || "Signed in,"
+                })
             }
+
+
+
         } catch (error) {
             console.error("OTP verification error:", error)
         } finally {
@@ -105,20 +129,27 @@ const Page = () => {
         if (resendCooldown > 0) return
 
         setIsSubmitting(true)
+        const toastId = toastLoading("Sending OTP...", {
+            description: "Sending OTP for verification"
+        })
         try {
             await new Promise(resolve => setTimeout(resolve, 800))
             setResendCooldown(30)
 
-            // Start cooldown timer
-            const interval = setInterval(() => {
-                setResendCooldown((prev) => {
-                    if (prev <= 1) {
-                        clearInterval(interval)
-                        return 0
-                    }
-                    return prev - 1
+            const response = await appClient.post("/api/auth/resend-otp", { email: emailFormik.values.email })
+
+            if (response.data.status) {
+                console.log("OTP sent to:", emailFormik.values.email)
+                toastUpdate(toastId, "success", "OTP send to your email", {
+                    description: response.data.message
                 })
-            }, 1000)
+                setStep(2)
+                setResendCooldown(120)
+            } else {
+                toastUpdate(toastId, "warning", "", {
+                    description: response.data.message
+                })
+            }
         } catch (error) {
             console.error("Error resending OTP:", error)
         } finally {
@@ -146,16 +177,33 @@ const Page = () => {
         }),
         onSubmit: async (values) => {
             setIsSubmitting(true)
+            const toastId = toastLoading("Changin...", {
+                description: "Changin your password, please wait"
+            })
             try {
-                // Simulate password reset API call
-                await new Promise(resolve => setTimeout(resolve, 1000))
-                console.log("Password reset for:", emailFormik.values.email)
-                setSubmitSuccess(true)
+                console.log("Password reset for:", emailFormik.values.email, values.password)
+                const payload = {
+                    email: emailFormik.values.email,
+                    password: values.password
+                }
+                const response = await appClient.post("/api/auth/forgot-password", payload)
+
+                if (response.data.status) {
+                    toastUpdate(toastId, "success", "Password changed", {
+                        description: response.data.message || "Signed in,"
+                    })
+                    setSubmitSuccess(false)
+                    router.push("/auth/log-in")
+                } else {
+                    toastUpdate(toastId, "warning", "", {
+                        description: response.data.message || "Signed in,"
+                    })
+                }
+
 
                 // Redirect to login after success
-                setTimeout(() => {
-                    router.push("/auth/log-in")
-                }, 2000)
+
+
             } catch (error) {
                 console.error("Password reset error:", error)
             } finally {
@@ -387,20 +435,6 @@ const Page = () => {
                                                             />
                                                         ))}
                                                     </div>
-
-                                                    {/* OTP Verification Status */}
-                                                    {otpVerified && (
-                                                        <motion.div
-                                                            initial={{ opacity: 0 }}
-                                                            animate={{ opacity: 1 }}
-                                                            className="mt-4 text-center"
-                                                        >
-                                                            <p className="text-green-500 text-sm flex items-center justify-center gap-2">
-                                                                <CheckCircle className="w-4 h-4" />
-                                                                Email verified successfully!
-                                                            </p>
-                                                        </motion.div>
-                                                    )}
                                                 </div>
 
                                                 {/* Resend OTP */}

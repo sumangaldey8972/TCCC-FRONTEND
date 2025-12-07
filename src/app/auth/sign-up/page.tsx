@@ -6,6 +6,8 @@ import * as Yup from "yup"
 import { motion, AnimatePresence } from "framer-motion"
 import { Loader2, CheckCircle, Eye, EyeOff, Key, Mail, User, Shield, Building2, Smartphone } from "lucide-react"
 import { useRouter } from "next/navigation"
+import appClient from "@/lib/appClient"
+import { toastLoading, toastUpdate } from "@/app/utils/toast-message"
 
 const Page = () => {
     const router = useRouter()
@@ -14,7 +16,7 @@ const Page = () => {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
     const [showOtpScreen, setShowOtpScreen] = useState(false)
     const [otp, setOtp] = useState(["", "", "", "", "", ""])
-    const [otpResendTimer, setOtpResendTimer] = useState(30)
+    const [otpResendTimer, setOtpResendTimer] = useState(120)
     const otpInputRefs = useRef<(HTMLInputElement | null)[]>([])
     const formRef = useRef<HTMLDivElement>(null)
 
@@ -80,17 +82,32 @@ const Page = () => {
         }),
         onSubmit: async (values) => {
             setIsSubmitting(true)
+            const toastId = toastLoading("Signing up...", {
+                description: "Adding your credentials, please wait"
+            })
             try {
-                // Simulate API call to send OTP
-                await new Promise(resolve => setTimeout(resolve, 1500))
 
                 console.log("Form submitted, OTP sent:", {
                     email: values.email,
+                    password: values.password,
                     registrationType: values.registrationType
                 })
 
+                const response = await appClient.post("/api/auth/signUp", values)
+
+                console.log("checking res", response)
+
+                if (response.data.status) {
+                    toastUpdate(toastId, "success", "Sign up successfull", {
+                        description: response.data.message || "Signed up,"
+                    })
+                    setShowOtpScreen(true)
+                }
+
+                toastUpdate(toastId, "success", "Sign up successfull", {
+                    description: response.data.message || "Signed up,"
+                })
                 // Show OTP screen
-                setShowOtpScreen(true)
 
             } catch (error) {
                 console.error("Submission error:", error)
@@ -103,6 +120,9 @@ const Page = () => {
     // Handle OTP verification
     const handleVerifyOtp = async () => {
         setIsSubmitting(true)
+        const toastId = toastLoading("Checking...", {
+            description: "Checking your otp, please wait"
+        })
         try {
             const otpCode = otp.join("")
 
@@ -111,17 +131,27 @@ const Page = () => {
                 return
             }
 
-            // Simulate OTP verification API call
-            await new Promise(resolve => setTimeout(resolve, 1500))
-
             console.log("OTP verified, user registered:", {
                 email: formik.values.email,
+                otp: otpCode,
                 registrationType: formik.values.registrationType
             })
 
-            // Simulate successful registration
-            // Here you would typically redirect to dashboard
-            console.log("Registration successful!")
+            const payload = {
+                email: formik.values.email,
+                otp: otpCode,
+                registrationType: formik.values.registrationType
+            }
+
+            const response = await appClient.post("/api/auth/verify-otp", payload)
+
+            if (response.data.status) {
+                toastUpdate(toastId, "success", "Verification successfull", {
+                    description: response.data.message || "Signed in,"
+                })
+
+                router.push("/auth/log-in")
+            }
 
         } catch (error) {
             console.error("Verification error:", error)
@@ -352,9 +382,9 @@ const Page = () => {
                                                             className="w-full pl-11 pr-4 py-3 bg-background border border-text-primary/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-text-primary/20 focus:border-text-primary/40 text-text-primary/90 text-sm appearance-none"
                                                         >
                                                             <option value="publisher">Publisher</option>
-                                                            <option value="advertiser" disabled>
+                                                            {/* <option value="advertiser" disabled>
                                                                 Advertiser (Coming Soon)
-                                                            </option>
+                                                            </option> */}
                                                         </select>
                                                         <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
                                                             <svg className="w-5 h-5 text-text-primary/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">

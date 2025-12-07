@@ -6,6 +6,10 @@ import * as Yup from "yup"
 import { motion } from "framer-motion"
 import { Loader2, CheckCircle, Eye, EyeOff, Key, Mail } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { useAppDispatch } from "@/store/hooks/hooks"
+import appClient from "@/lib/appClient"
+import { toastLoading, toastUpdate } from "@/app/utils/toast-message"
+import { signin } from "@/store/slices/authSlice"
 
 const Page = () => {
 
@@ -15,6 +19,8 @@ const Page = () => {
     const [showPassword, setShowPassword] = useState(false)
     const [submitSuccess, setSubmitSuccess] = useState(false)
     const formRef = useRef<HTMLDivElement>(null)
+
+    const dispatch = useAppDispatch()
 
     // Formik Setup
     const formik = useFormik({
@@ -35,20 +41,30 @@ const Page = () => {
         }),
         onSubmit: async (values) => {
             setIsSubmitting(true)
+            const toastId = toastLoading("Signing in...", {
+                description: "Checking your credentials, please wait"
+            })
+
             try {
-                // API Call Simulation
-                await new Promise(resolve => setTimeout(resolve, 1500))
+                const res = await appClient.post("/api/auth/signIn", values)
 
-                console.log("Form submitted:", {
-                    email: values.email,
-                    password: values.password
-                })
+                if (res.data.status) {
+                    const user = res.data.user
+                    toastUpdate(toastId, "success", "Sign in successfull", {
+                        description: res.data.message || "Signed in,"
+                    })
+                    router.push("/become-a-publisher")
+                    dispatch(signin({ user }))
+                    setIsSubmitting(false)
+                } else {
+                    toastUpdate(toastId, "error", "Sign in error", {
+                        description: res.data.message || "Signed in,"
+                    })
+                    setIsSubmitting(false)
+                }
 
-                setSubmitSuccess(true)
-                setTimeout(() => setSubmitSuccess(false), 3000)
             } catch (error) {
-                console.error("Submission error:", error)
-            } finally {
+                console.log("this is an error while sign in", error)
                 setIsSubmitting(false)
             }
         }

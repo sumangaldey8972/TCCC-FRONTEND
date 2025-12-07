@@ -10,7 +10,8 @@ export interface User {
     isVerified: boolean;
     kycStatus: string;
     email: string;
-    role: string;
+    role: string[];
+    registrationType: string[];
     refreshToken: string;
     profilePicture: string;
     country?: string;

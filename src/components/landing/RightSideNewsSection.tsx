@@ -17,7 +17,7 @@ const RightSideNewsSection = () => {
         const fetchNews = async () => {
             try {
                 setLoading(true);
-                const q = query(collection(db, "news"), orderBy("createdAt", "desc"), limit(4));
+                const q = query(collection(db, "news"), orderBy("createdAt", "desc"), limit(5));
                 const querySnapshot = await getDocs(q);
 
                 const newsList = querySnapshot.docs.map((doc) => ({
@@ -98,7 +98,7 @@ const RightSideNewsSection = () => {
     );
 
     return (
-        <div>
+        <div className="w-full h-full" >
             <div className="text-white p-3 bg-text-primary/50   rounded-xl border border-gray-700 shadow-2xl space-y-6">
                 {/* Header */}
                 <div className="flex justify-between items-center">
