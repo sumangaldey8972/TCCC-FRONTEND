@@ -25,7 +25,8 @@ export interface User {
     profilePhotoUrl?: string;
     phoneNumber?: string;
     landlineNumber?: string | null;
-    password?: string
+    password?: string;
+    isPublisherFormSubmitted?: boolean
 
 }
 
@@ -57,6 +58,7 @@ const authSlice = createSlice({
 
         },
         updateUser(state, action: PayloadAction<{ user: User }>) {
+            console.log(action.payload.user)
             state.isAuthenticated = true;
             state.user = action.payload.user;
             state.accessToken = null;

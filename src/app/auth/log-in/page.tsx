@@ -53,7 +53,7 @@ const Page = () => {
                     toastUpdate(toastId, "success", "Sign in successfull", {
                         description: res.data.message || "Signed in,"
                     })
-                    router.push("/become-a-publisher")
+                    router.push("/")
                     dispatch(signin({ user }))
                     setIsSubmitting(false)
                 } else {

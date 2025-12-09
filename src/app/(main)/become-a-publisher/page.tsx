@@ -7,11 +7,14 @@ import PixelGrid from "@/components/publisher/PixelGrid"
 import FloatingParticles from "@/components/publisher/FloatingParticles"
 import LeftContent from "@/components/publisher/LeftContent"
 import RightForm from "@/components/publisher/RightForm"
-import { motion } from "framer-motion"
-import { CheckCircle } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
+import { CheckCircle, Lock, Shield } from "lucide-react"
 import ApplicationStatus from "@/components/publisher/ApplicationStatus"
-import PublisherForm from "@/components/publisher/PublisherForm"
 import { useRouter } from "next/navigation"
+import { useAppSelector } from "@/store/hooks/hooks"
+import PublisherFormVTwo from "@/components/publisher/PublisherFormVTwo"
+import VerificationModal from "@/components/publisher/steper/Step2VerificationModal"
+import { FormData } from "@/type/publisher.type"
 
 const PublisherPage = () => {
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -24,7 +27,37 @@ const PublisherPage = () => {
     const [isPublisherFormSubmitted, setIsPublisherFormSubmitted] = useState(false)
     const [isPublisherVerified, setIsPublisherVerified] = useState(false)
 
+    const [verificationSkipped, setVerificationSkipped] = useState(false)
+    const [verificationStatus, setVerificationStatus] = useState<'pending' | 'verifying' | 'verified' | 'failed'>('pending')
+
     const router = useRouter()
+
+    const [isModalOpen, setIsModalOpen] = useState(false)
+
+    const user = useAppSelector((store) => store.auth.user)
+
+    // Form state
+    const [formData, setFormData] = useState<FormData>({
+        accountType: "individual",
+        fullName: "",
+        organizationName: "",
+        phoneNumber: "",
+        countryCode: "+91",
+        telegramUsername: "",
+        website: "",
+        description: "",
+        profileLink: "",
+        verificationToken: "",
+        userId: user?._id || ""
+    })
+
+
+    useEffect(() => {
+        if (user?.isPublisherFormSubmitted) {
+            setIsPublisherFormSubmitted(true)
+        }
+    }, [user])
+
 
     // 3D Animation Effect (only for form)
     useEffect(() => {
@@ -46,49 +79,124 @@ const PublisherPage = () => {
         }
     }, [])
 
-    const handleSubmit = async (values: any) => {
-        setIsSubmitting(true)
-        try {
-            // API Call Simulation
-            await new Promise(resolve => setTimeout(resolve, 1500))
-
-            console.log("Form submitted:", {
-                email: values.email,
-                type: values.type
-            })
-
-            // Simulate successful authentication
-            setIsAuthed(true)
-            setSubmitSuccess(true)
-            setTimeout(() => setSubmitSuccess(false), 3000)
-        } catch (error) {
-            console.error("Submission error:", error)
-        } finally {
-            setIsSubmitting(false)
-        }
-    }
-
 
 
     // Render different content based on auth state
     const renderRightContent = () => {
-        // Case 1: Not authenticated - show login/signup form
-        if (!isAuthed) {
-            return (
-                <RightForm
-                    ref={formRef}
-                    isSubmitting={isSubmitting}
-                    submitSuccess={submitSuccess}
-                    onSubmit={handleSubmit}
-                />
-            )
-        }
 
         // Case 2: Authenticated but publisher form not submitted
         if (isAuthed && !isPublisherFormSubmitted) {
             return (
-                <PublisherForm isSubmitting={isSubmitting} ref={formRef} setIsSubmitting={setIsSubmitting} setIsPublisherFormSubmitted={setIsPublisherFormSubmitted} />
-                // router.push("/become-a-publisher/start-your-journey")
+                <div className="relative">
+                    {/* Main Form */}
+                    <PublisherFormVTwo
+                        isSubmitting={isSubmitting}
+                        ref={formRef}
+                        setIsSubmitting={setIsSubmitting}
+                        setIsPublisherFormSubmitted={setIsPublisherFormSubmitted}
+                        setIsModalOpen={setIsModalOpen}
+                        formData={formData}
+                        setFormData={setFormData}
+                    />
+
+                    {/* Authentication Overlay */}
+                    <AnimatePresence>
+                        {!user && (
+                            <>
+                                {/* Blur Overlay */}
+                                <motion.div
+                                    initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+                                    animate={{ opacity: 1, backdropFilter: "blur(4px)" }}
+                                    exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+                                    transition={{ duration: 0.3 }}
+                                    className="absolute inset-0 bg-background/40 dark:bg-black/40 z-10 rounded-xl"
+                                />
+
+                                {/* Authentication Message */}
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                                    exit={{ opacity: 0, y: 20, scale: 0.95 }}
+                                    transition={{ duration: 0.3, delay: 0.1 }}
+                                    className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center"
+                                >
+                                    <div className="max-w-md mx-auto space-y-6">
+                                        {/* Icon */}
+                                        <div className="relative">
+                                            {/* <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full blur-xl opacity-20 animate-pulse" /> */}
+                                            <div className="relative w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-text-primary/10 to-purple-500/10 border-2 border-text-primary/20 flex items-center justify-center">
+                                                <Lock className="w-10 h-10 text-text-primary" />
+                                            </div>
+                                        </div>
+
+                                        {/* Message */}
+                                        <div className="space-y-4">
+                                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                                                Become a Publisher
+                                            </h3>
+                                            <p className="text-lg text-gray-600 dark:text-gray-300">
+                                                Sign up to unlock publisher features and start monetizing your content
+                                            </p>
+                                        </div>
+
+                                        {/* Benefits List */}
+                                        <div className="space-y-3">
+                                            <div className="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300">
+                                                <Shield className="w-5 h-5 text-green-500 flex-shrink-0" />
+                                                <span>Secure publisher dashboard</span>
+                                            </div>
+                                            <div className="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300">
+                                                <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                                                <span>Verified badge for trusted publishers</span>
+                                            </div>
+                                            <div className="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300">
+                                                <svg className="w-5 h-5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                                                </svg>
+                                                <span>Premium analytics and insights</span>
+                                            </div>
+                                        </div>
+
+                                        {/* Call to Action */}
+                                        <div className="pt-6">
+                                            <motion.button
+                                                whileHover={{ scale: 1.05 }}
+                                                whileTap={{ scale: 0.95 }}
+                                                onClick={() => {
+                                                    // Redirect to sign up page
+                                                    router.push('/auth/sign-up')
+
+                                                }}
+                                                className="group relative px-8 py-4 bg-text-primary text-background font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+                                            >
+                                                <span className="relative flex items-center justify-center gap-3">
+                                                    Sign Up to Get Started
+                                                    <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                                    </svg>
+                                                </span>
+                                            </motion.button>
+
+                                            {/* Already have account */}
+                                            <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+                                                Already have an account?{" "}
+                                                <button
+                                                    onClick={() => {
+                                                        // Redirect to login page
+                                                        router.push('/auth/log-in')
+                                                    }}
+                                                    className="text-text-primary font-medium hover:underline"
+                                                >
+                                                    Sign in here
+                                                </button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            </>
+                        )}
+                    </AnimatePresence>
+                </div>
 
             )
         }
@@ -211,6 +319,16 @@ const PublisherPage = () => {
                     animation: shine 3s ease-in-out infinite;
                 }
             `}</style>
+
+            <VerificationModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                formData={formData}
+                verificationStatus={verificationStatus}
+                verificationSkipped={verificationSkipped}
+                setVerificationStatus={setVerificationStatus}
+                setVerificationSkipped={setVerificationSkipped}
+            />
         </div>
     )
 }

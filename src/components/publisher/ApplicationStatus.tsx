@@ -91,13 +91,6 @@ const ApplicationStatus = () => {
                                 </div>
                             </div>
                         </div>
-
-                        <button
-                            onClick={() => window.location.href = '/dashboard'}
-                            className="w-full py-3 px-4 bg-gradient-to-r from-text-primary to-text-primary/90 hover:from-text-primary/90 hover:to-text-primary disabled:opacity-50 text-background font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-text-primary/30"
-                        >
-                            Go to Dashboard
-                        </button>
                     </div>
                 </div>
             </div>

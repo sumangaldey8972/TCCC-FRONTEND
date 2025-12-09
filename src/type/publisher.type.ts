@@ -3,12 +3,13 @@ export interface FormData {
     fullName: string
     organizationName: string
     phoneNumber: string
-    hasWhatsApp: boolean
     telegramUsername: string
     website: string
     description: string
     profileLink: string
-    verificationToken: string
+    verificationToken: string,
+    countryCode: String,
+    userId: String
 }
 
 export interface Errors {
@@ -18,7 +19,10 @@ export interface Errors {
 export interface PublisherFormProps {
     setIsSubmitting: (t: boolean) => void
     setIsPublisherFormSubmitted: (t: boolean) => void
-    isSubmitting: boolean
+    isSubmitting: boolean,
+    setIsModalOpen: (t: boolean) => void,
+    formData: FormData
+    setFormData: React.Dispatch<React.SetStateAction<FormData>>
 }
 
 export interface Step1BasicInfoProps {

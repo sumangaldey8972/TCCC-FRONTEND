@@ -38,6 +38,9 @@ type ApiEndPoints = {
     },
     consultation: {
         create: string
+    },
+    publisher: {
+        create: string
     }
 }
 
@@ -85,5 +88,8 @@ export const API_ENDPOINTS: ApiEndPoints = {
     },
     consultation: {
         create: "/consultation"
+    },
+    publisher: {
+        create: "/publisher/create"
     }
 }

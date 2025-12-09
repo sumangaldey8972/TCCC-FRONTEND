@@ -7,6 +7,7 @@ import logo from "@/assets/logo_svg.png";
 import { useRouter } from "next/navigation";
 import { useTheme } from "@/providers/ThemeProvider";
 import { Bell, Moon, Sun, Menu, X, ChevronDown, Search, User, Wallet } from "lucide-react";
+import { useAppSelector } from "@/store/hooks/hooks";
 
 const Navbar = () => {
     const router = useRouter()
@@ -15,6 +16,14 @@ const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
     const { theme, setTheme } = useTheme()
+
+    const user = useAppSelector((store) => store.auth.user)
+
+    useEffect(() => {
+        if (user) {
+            setIsAuthedUser(true)
+        }
+    }, [user])
 
     const navItems = [
         { label: "Publisher", href: "/become-a-publisher" },
@@ -243,6 +252,7 @@ const Navbar = () => {
                                             whileHover={{ scale: 1.02 }}
                                             whileTap={{ scale: 0.98 }}
                                             className="px-4 py-3 rounded-lg text-center border border-[var(--border)] hover:bg-[var(--primary)]/10 transition-colors duration-200"
+                                            onClick={() => router.push("/auth/log-in")}
                                         >
                                             Login
                                         </motion.button>
@@ -250,6 +260,7 @@ const Navbar = () => {
                                             whileHover={{ scale: 1.02 }}
                                             whileTap={{ scale: 0.98 }}
                                             className="px-4 py-3 rounded-lg bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] text-white font-medium"
+                                            onClick={() => router.push("/auth/sign-up")}
                                         >
                                             Sign Up
                                         </motion.button>
