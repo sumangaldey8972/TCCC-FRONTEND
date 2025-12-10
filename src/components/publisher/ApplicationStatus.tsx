@@ -23,7 +23,7 @@ const ApplicationStatus = () => {
                             Application Under Review
                         </h2>
                         <p className="text-text-primary/60 text-sm">
-                            We're reviewing your publisher application
+                            We&apos;re reviewing your publisher application
                         </p>
                     </div>
 
@@ -86,7 +86,7 @@ const ApplicationStatus = () => {
                                         <span className="text-xs text-amber-500 font-medium">3</span>
                                     </div>
                                     <p className="text-sm text-text-primary/60">
-                                        You'll receive an email notification with the result
+                                        You&apos;ll receive an email notification with the result
                                     </p>
                                 </div>
                             </div>

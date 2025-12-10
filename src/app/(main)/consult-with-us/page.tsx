@@ -197,7 +197,7 @@ const ConsultWithUsPage = () => {
 
                         {/* Features - Compact Grid */}
                         <div className="space-y-3">
-                            <h3 className="text-lg font-semibold text-text-primary">What's Included</h3>
+                            <h3 className="text-lg font-semibold text-text-primary">What&apos;s Included</h3>
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                                 {features.map((feature, index) => (
                                     <motion.div
@@ -504,7 +504,7 @@ const ConsultWithUsPage = () => {
                                                     Booked Successfully!
                                                 </h3>
                                                 <p className="text-text-primary/70 text-sm mb-3">
-                                                    We'll contact you within 24 hours.
+                                                    We&apos;ll contact you within 24 hours.
                                                 </p>
                                                 <motion.button
                                                     whileHover={{ scale: 1.05 }}

@@ -345,7 +345,7 @@ export default function TokenomicsComingSoon() {
                                 transition={{ delay: 0.4 }}
                                 className="text-xl lg:text-2xl text-text-primary/60 max-w-3xl mx-auto leading-relaxed"
                             >
-                                We're building a comprehensive tokenomics dashboard with real-time data,
+                                We&apos;re building a comprehensive tokenomics dashboard with real-time data,
                                 advanced analytics, and powerful tools for cryptocurrency investors.
                             </motion.p>
                         </motion.div>
@@ -362,7 +362,7 @@ export default function TokenomicsComingSoon() {
                                     Launching Soon
                                 </h2>
                                 <p className="text-text-primary/50">
-                                    We're working hard to bring you the best tokenomics experience
+                                    We&apos;re working hard to bring you the best tokenomics experience
                                 </p>
                             </div>
                         </motion.div>
@@ -376,10 +376,10 @@ export default function TokenomicsComingSoon() {
                         >
                             <div className="text-center mb-8">
                                 <h2 className="text-2xl lg:text-3xl font-semibold text-text-primary mb-2">
-                                    What's Coming
+                                    What&apos;s Coming
                                 </h2>
                                 <p className="text-text-primary/50 max-w-2xl mx-auto">
-                                    Explore the powerful features we're building for your tokenomics analysis
+                                    Explore the powerful features we&apos;re building for your tokenomics analysis
                                 </p>
                             </div>
 

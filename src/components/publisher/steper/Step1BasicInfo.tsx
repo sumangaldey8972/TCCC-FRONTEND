@@ -2,7 +2,6 @@
 
 import { motion, AnimatePresence } from "framer-motion"
 import { Smartphone, Globe, User, Building, Link as LinkIcon, ChevronDown, Search } from "lucide-react"
-import { handleInputChange } from "./utils"
 import { Step1BasicInfoProps } from "@/type/publisher.type"
 import { FaTelegramPlane } from "react-icons/fa"
 import { useState, useMemo } from "react"
@@ -34,9 +33,29 @@ const Step1BasicInfo = ({ formData, errors, setFormData, setErrors }: Step1Basic
     const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false)
     const [countrySearch, setCountrySearch] = useState("")
 
-    const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        handleInputChange(e, setFormData, setErrors)
-    }
+    const onChange = (
+        e: React.ChangeEvent<
+            HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+        >
+    ) => {
+        const { name, value, type } = e.target;
+
+        // Update form data
+        setFormData(prev => ({
+            ...prev,
+            [name]:
+                type === "checkbox"
+                    ? (e.target as HTMLInputElement).checked
+                    : value,
+        }));
+
+        // Clear error
+        setErrors(prev => ({
+            ...prev,
+            [name]: "",
+        }));
+    };
+
 
     const handleAccountTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target

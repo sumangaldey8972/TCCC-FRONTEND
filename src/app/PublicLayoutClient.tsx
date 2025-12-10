@@ -1,7 +1,6 @@
 "use client";
 
 import Footer from "@/components/common/Footer";
-import PublicNavbarVTwo from "@/components/landing/PublicNavbarVtwo";
 import Navbar from "@/components/navbar/Navbar";
 
 export default function PublicLayoutClient({
@@ -13,7 +12,6 @@ export default function PublicLayoutClient({
 
     return (
         <>
-            {/* <PublicNavbarVTwo /> */}
             <Navbar />
             <main>{children}</main>
             <Footer />

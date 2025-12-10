@@ -253,7 +253,7 @@ const Page = () => {
             {/* Back button */}
             <div className="absolute top-6 left-6 z-20">
                 <motion.button
-                    onClick={() => step === 1 ? router.back() : setStep(step - 1 as any)}
+                    onClick={() => step === 1 ? router.back() : setStep(step - 1 as 1 | 2 | 3)}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="flex items-center gap-2 text-text-primary/60 hover:text-text-primary transition-colors p-2"
@@ -440,7 +440,7 @@ const Page = () => {
                                                 {/* Resend OTP */}
                                                 <div className="text-center">
                                                     <p className="text-text-primary/60 text-sm mb-2">
-                                                        Didn't receive the code?
+                                                        Didn&apos;t receive the code?
                                                     </p>
                                                     <button
                                                         type="button"

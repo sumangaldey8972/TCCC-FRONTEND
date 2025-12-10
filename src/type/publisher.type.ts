@@ -8,8 +8,8 @@ export interface FormData {
     description: string
     profileLink: string
     verificationToken: string,
-    countryCode: String,
-    userId: String
+    countryCode: string,
+    userId: string
 }
 
 export interface Errors {
@@ -26,10 +26,10 @@ export interface PublisherFormProps {
 }
 
 export interface Step1BasicInfoProps {
-    formData: FormData
-    errors: Errors
-    setFormData: React.Dispatch<React.SetStateAction<FormData>>
-    setErrors: React.Dispatch<React.SetStateAction<Errors>>
+    formData: FormData;
+    errors: Errors;
+    setFormData: React.Dispatch<React.SetStateAction<FormData>>;
+    setErrors: React.Dispatch<React.SetStateAction<Errors>>;
 }
 
 export interface Step2VerificationProps {

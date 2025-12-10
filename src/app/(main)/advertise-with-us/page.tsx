@@ -226,7 +226,7 @@ export default function CommunityComingSoon() {
                                     Built for Every Stage of Your Journey
                                 </h2>
                                 <p className="text-text-primary/70 max-w-2xl mx-auto">
-                                    Whether you're launching fresh or scaling existing, we help you rise above the noise.
+                                    Whether you&apos;re launching fresh or scaling existing, we help you rise above the noise.
                                 </p>
                             </div>
 

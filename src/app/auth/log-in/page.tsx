@@ -278,7 +278,7 @@ const Page = () => {
                                     {/* Registration Link */}
                                     <div className="text-center pt-6 border-t border-text-primary/10">
                                         <p className="text-text-primary/60 text-sm">
-                                            Don't have an account?{" "}
+                                            Don&apos;t have an account?{" "}
                                             <span
                                                 onClick={() => router.push("/auth/sign-up")}
                                                 className="text-text-primary/80 hover:text-text-primary font-medium transition-colors cursor-pointer"

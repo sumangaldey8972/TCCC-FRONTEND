@@ -202,7 +202,7 @@ const VerificationModal = ({
                                                                         HTML Meta Tag
                                                                     </h5>
                                                                     <p className="text-xs text-gray-600 dark:text-gray-400">
-                                                                        Add to your website's &lt;head&gt; section
+                                                                        Add to your website&apos;s &lt;head&gt; section
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -250,8 +250,8 @@ const VerificationModal = ({
                                                                         Need help?
                                                                     </p>
                                                                     <p className="text-xs text-gray-600 dark:text-gray-400">
-                                                                        After adding the verification to your website, click "Verify Now".
-                                                                        If you're not the website owner, you can skip this step and verify later.
+                                                                        After adding the verification to your website, click &quot;Verify Now&quot;.
+                                                                        If you&apos;re not the website owner, you can skip this step and verify later.
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -328,7 +328,7 @@ const VerificationModal = ({
                                                             No Website Provided
                                                         </p>
                                                         <p className="text-xs text-gray-600 dark:text-gray-400">
-                                                            You haven't provided a website URL. You can submit your application directly
+                                                            You haven&apos;t provided a website URL. You can submit your application directly
                                                             and add a website later.
                                                         </p>
                                                     </div>

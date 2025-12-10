@@ -5,7 +5,6 @@ import { ReduxProvider } from "./providers";
 import { Toaster } from "sonner";
 import PublicLayoutClient from "./PublicLayoutClient";
 import { ThemeProvider } from "@/providers/ThemeProvider";
-import { headers } from "next/headers";
 
 const inter = Inter({
   variable: "--font-inter",
