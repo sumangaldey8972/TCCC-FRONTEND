@@ -41,11 +41,15 @@ type ApiEndPoints = {
     },
     publisher: {
         create: string
+    },
+    category: {
+        get: (search: string, page: string, limit: string) => string,
+        getSubCategory: (parentCategoryName: string, page: string, limit: string) => string
     }
 }
 
-export const BASE_API_URL = "https://api.thecoincartel.club/"
-// export const BASE_API_URL = "http://localhost:8080/"
+// export const BASE_API_URL = "https://api.thecoincartel.club/"
+export const BASE_API_URL = "http://localhost:8080/"
 // 
 
 export const API_ENDPOINTS: ApiEndPoints = {
@@ -91,5 +95,9 @@ export const API_ENDPOINTS: ApiEndPoints = {
     },
     publisher: {
         create: "/publisher/create"
+    },
+    category: {
+        get: (search, page, limit) => `/category?search=${search}&page=${page}&limit=${limit}`,
+        getSubCategory: (parentCategoryName, page, limit) => `/category/sub-categories?categoryName=${parentCategoryName}&page=${page}&limit=${limit}`
     }
 }

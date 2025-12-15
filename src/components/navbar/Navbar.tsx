@@ -29,7 +29,7 @@ const Navbar = () => {
         { label: "Publisher", href: "/become-a-publisher" },
         { label: "NFTs", href: "#" },
         { label: "Crypto Prediction", href: "#" },
-        { label: "News | Blogs", href: "#" },
+        { label: "News | Blogs", href: "/news-blogs" },
         { label: "Tokenomics", href: "/tokenomics" },
     ];
 
