@@ -107,7 +107,7 @@ const RightSideNewsSection = () => {
                             Latest News
                         </h2>
                     </div>
-                    <button onClick={() => router.replace("/news")} className="text-sm group flex items-center space-x-2 text-background/70 hover:text-[#FFD700] transition-all duration-300 font-semibold px-4 py-2 rounded-lg hover:bg-gray-800/50 border border-transparent hover:border-gray-600">
+                    <button onClick={() => router.replace("/news-blogs")} className="text-sm group flex items-center space-x-2 text-background/70 hover:text-[#FFD700] transition-all duration-300 font-semibold px-4 py-2 rounded-lg hover:bg-gray-800/50 border border-transparent hover:border-gray-600">
                         <span>View All News</span>
                         <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
                     </button>

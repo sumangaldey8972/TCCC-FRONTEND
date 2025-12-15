@@ -248,7 +248,7 @@ const NewsDetailPage = () => {
                                 {/* Category Badge */}
                                 <div className="absolute top-6 left-6">
                                     <span className="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-semibold uppercase tracking-wide">
-                                        {typeof newsData.category === 'object' ? newsData.category.name : 'Crypto'}
+                                        {newsData?.category?.name ?? "Crypto"}
                                     </span>
                                 </div>
 

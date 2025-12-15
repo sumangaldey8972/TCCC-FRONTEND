@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import logo from "@/assets/logo_svg.png";
 import { useRouter } from "next/navigation";
 import { useTheme } from "@/providers/ThemeProvider";
-import { Bell, Moon, Sun, Menu, X, ChevronDown, Search, User, Wallet } from "lucide-react";
+import { Bell, Moon, Sun, Menu, X, User, Wallet } from "lucide-react";
 import { useAppSelector } from "@/store/hooks/hooks";
 
 const Navbar = () => {
@@ -28,9 +28,9 @@ const Navbar = () => {
     const navItems = [
         { label: "Publisher", href: "/become-a-publisher" },
         { label: "NFTs", href: "#" },
-        { label: "Crypto Prediction", href: "#" },
+        { label: "Crypto Prediction", href: "/crypto-prediction" },
         { label: "News | Blogs", href: "/news-blogs" },
-        { label: "Tokenomics", href: "/tokenomics" },
+        { label: "Marketplace", href: "/#" },
     ];
 
     const toggleTheme = () => {

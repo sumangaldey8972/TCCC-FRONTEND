@@ -5,24 +5,14 @@ import appClient from "@/lib/appClient"
 import { useCallback, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Newspaper } from "lucide-react"
-import { NewsItem } from "@/type/news.type"
+import { NewsItem, PaginationInfo } from "@/type/news.type"
 import LoadingState from "@/components/news/newsAndBlogs/LoadingState"
 import BreakingNewsCard from "@/components/news/newsAndBlogs/BreakingNewsCard"
 import NewsCard from "@/components/news/newsAndBlogs/NewsCard"
 import PaginationControls from "@/components/news/newsAndBlogs/PaginationControls"
 import TrendingSidebar from "@/components/news/newsAndBlogs/TrendingSidebar"
+import { formatDate } from "@/lib/utils"
 
-
-interface PaginationInfo {
-    totalDocs: number
-    limit: number
-    totalPages: number
-    page: number
-    hasPrevPage: boolean
-    hasNextPage: boolean
-    prevPage: number | null
-    nextPage: number | null
-}
 
 const NewsAndBlogsPage = () => {
     const router = useRouter()
@@ -40,27 +30,6 @@ const NewsAndBlogsPage = () => {
         prevPage: null,
         nextPage: null
     })
-
-    const formatDate = (dateString: string) => {
-        const date = new Date(dateString)
-        const now = new Date()
-        const diffTime = Math.abs(now.getTime() - date.getTime())
-        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24))
-
-        if (diffDays === 0) {
-            return 'Today'
-        } else if (diffDays === 1) {
-            return 'Yesterday'
-        } else if (diffDays < 7) {
-            return `${diffDays} days ago`
-        } else {
-            return date.toLocaleDateString('en-US', {
-                month: 'short',
-                day: 'numeric',
-                year: 'numeric'
-            })
-        }
-    }
 
     const handleGetNews = useCallback(async (page: number, limit: number) => {
         try {

@@ -20,7 +20,7 @@ type ApiEndPoints = {
         add: string
     },
     news: {
-        get: (page: string, limit: string) => string,
+        get: (parentCategoryName: string, page: string, limit: string) => string,
         slug: (slug: string) => string
     },
     newsLike: {
@@ -74,7 +74,7 @@ export const API_ENDPOINTS: ApiEndPoints = {
         add: '/member'
     },
     news: {
-        get: (page, limit) => `/news?page=${page}&limit=${limit}`,
+        get: (parentCategoryName, page, limit) => `/news?parentCategoryName=${parentCategoryName}&page=${page}&limit=${limit}`,
         slug: (slug) => `/news/slug?slug=${slug}`
     },
     newsLike: {
