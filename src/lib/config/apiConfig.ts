@@ -4,7 +4,8 @@ type ApiEndPoints = {
         signUp: string;
         verifyOtp: string;
         resendOtp: string;
-        forgotPassword: string
+        forgotPassword: string;
+        logout: string
     },
     wallets: {
         add: string
@@ -58,7 +59,8 @@ export const API_ENDPOINTS: ApiEndPoints = {
         signUp: "/auth/sign-up",
         verifyOtp: "/auth/verify-otp",
         resendOtp: "/auth/resend-otp",
-        forgotPassword: "/auth/forgot-password"
+        forgotPassword: "/auth/forgot-password",
+        logout: "/auth/logout"
     },
     wallets: {
         add: "/wallet/add"

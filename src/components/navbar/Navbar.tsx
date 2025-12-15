@@ -1,27 +1,38 @@
 "use client"
 
 import { motion, AnimatePresence } from "framer-motion"
-import Image from "next/image";
-import { useState, useEffect } from "react";
-import logo from "@/assets/logo_svg.png";
-import { useRouter } from "next/navigation";
-import { useTheme } from "@/providers/ThemeProvider";
-import { Bell, Moon, Sun, Menu, X, User, Wallet } from "lucide-react";
-import { useAppSelector } from "@/store/hooks/hooks";
+import Image from "next/image"
+import { useState, useEffect, useRef } from "react"
+import logo from "@/assets/logo_svg.png"
+import { useRouter } from "next/navigation"
+import { useTheme } from "@/providers/ThemeProvider"
+import { Bell, Moon, Sun, Menu, X, User, Wallet, LogOut, Eye, EyeOff, Settings, CreditCard, HelpCircle, Shield } from "lucide-react"
+import { useAppSelector, useAppDispatch } from "@/store/hooks/hooks"
+import appClient from "@/lib/appClient"
+import { signout } from "@/store/slices/authSlice"
+// import { logout } from "@/store/slices/authSlice" // Assuming you have logout action
 
 const Navbar = () => {
     const router = useRouter()
+    const dispatch = useAppDispatch()
     const [isAuthedUser, setIsAuthedUser] = useState(false)
-    const [isScrolled, setIsScrolled] = useState(false);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
+    const [isScrolled, setIsScrolled] = useState(false)
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+    const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
+    const [showBalance, setShowBalance] = useState(false)
     const { theme, setTheme } = useTheme()
+    const [loading, setLoading] = useState(false)
+
+    const userMenuRef = useRef<HTMLDivElement>(null)
+    const userButtonRef = useRef<HTMLButtonElement>(null)
 
     const user = useAppSelector((store) => store.auth.user)
 
     useEffect(() => {
         if (user) {
             setIsAuthedUser(true)
+        } else {
+            setIsAuthedUser(false)
         }
     }, [user])
 
@@ -31,31 +42,84 @@ const Navbar = () => {
         { label: "Crypto Prediction", href: "/crypto-prediction" },
         { label: "News | Blogs", href: "/news-blogs" },
         { label: "Marketplace", href: "/#" },
-    ];
+    ]
+
+    // User menu items (can be expanded later)
+    const userMenuItems = [
+        { icon: Settings, label: "Settings", href: "/settings" },
+        { icon: CreditCard, label: "Billing", href: "/billing" },
+        { icon: Shield, label: "Security", href: "/security" },
+        { icon: HelpCircle, label: "Help & Support", href: "/help" },
+    ]
 
     const toggleTheme = () => {
-        setTheme(theme === "light" ? "dark" : "light");
+        setTheme(theme === "light" ? "dark" : "light")
+    }
+
+    const toggleUserMenu = () => {
+        setIsUserMenuOpen(!isUserMenuOpen)
+    }
+
+    const handleLogout = async () => {
+        setLoading(true)
+        try {
+            const res = await appClient.post('/api/auth/log-out', {})
+
+            if (res.data.status) {
+                dispatch(signout())
+                setLoading(false)
+                setIsUserMenuOpen(false)
+                router.push("/")
+            }
+
+        } catch (error) {
+            setLoading(false)
+        }
     };
+
+    const formatEmail = (email: string) => {
+        if (!email) return ""
+        const [username, domain] = email.split('@')
+        if (username.length > 3) {
+            return `${username.substring(0, 3)}***@${domain}`
+        }
+        return `***@${domain}`
+    }
+
+    // Close user menu when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (
+                userMenuRef.current &&
+                !userMenuRef.current.contains(event.target as Node) &&
+                userButtonRef.current &&
+                !userButtonRef.current.contains(event.target as Node)
+            ) {
+                setIsUserMenuOpen(false)
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [])
 
     useEffect(() => {
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20);
-        };
+            setIsScrolled(window.scrollY > 20)
+        }
 
-        const handleClickOutside = (e: MouseEvent) => {
-            if (!(e.target as Element).closest('.dropdown')) {
-                setDropdownOpen(null);
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        document.addEventListener('click', handleClickOutside);
-
+        window.addEventListener('scroll', handleScroll)
         return () => {
-            window.removeEventListener('scroll', handleScroll);
-            document.removeEventListener('click', handleClickOutside);
-        };
-    }, []);
+            window.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
+
+    const maskBalance = (amount: string) => {
+        if (showBalance) return amount
+        return "••••••••"
+    }
 
     return (
         <>
@@ -101,14 +165,13 @@ const Navbar = () => {
                             {navItems.map((item) => (
                                 <div
                                     key={item.label}
-                                    className="relative dropdown"
-                                    onClick={() => router.replace(item.href)}
+                                    className="relative"
+                                    onClick={() => router.push(item.href)}
                                 >
                                     <button
                                         className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium text-[var(--foreground)] hover:text-[var(--primary)] hover:bg-[var(--primary)]/10 transition-all duration-200 group"
                                     >
                                         {item.label}
-
                                     </button>
                                 </div>
                             ))}
@@ -132,24 +195,108 @@ const Navbar = () => {
                                         </motion.button>
                                     </div>
 
-                                    {/* Wallet Balance */}
-                                    <div className="px-4 py-2 rounded-xl bg-dark-800 border border-[var(--border)]/30">
-                                        <div className="flex items-center gap-2">
-                                            <Wallet size={16} className="text-[var(--primary)]" />
-                                            <div>
-                                                <p className="text-xs text-[var(--muted-foreground)]">Balance</p>
-                                                <p className="text-sm font-semibold">$ 0.00</p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {/* User Profile Menu */}
+                                    <div className="relative dropdown" ref={userMenuRef}>
+                                        <motion.button
+                                            ref={userButtonRef}
+                                            whileHover={{ scale: 1.05 }}
+                                            whileTap={{ scale: 0.95 }}
+                                            onClick={toggleUserMenu}
+                                            className="flex items-center gap-2 p-2 rounded-full bg-[var(--primary)]/10 hover:bg-[var(--primary)]/20 transition-colors duration-200"
+                                            aria-label="User menu"
+                                        >
+                                            <User size={20} />
+                                        </motion.button>
 
-                                    {/* User Profile */}
-                                    <motion.div
-                                        whileHover={{ scale: 1.05 }}
-                                        className="p-2 rounded-full bg-background text-primary cursor-pointer"
-                                    >
-                                        <User size={20} />
-                                    </motion.div>
+                                        {/* User Dropdown Menu */}
+                                        <AnimatePresence>
+                                            {isUserMenuOpen && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                                                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                                    transition={{ duration: 0.2 }}
+                                                    className="absolute right-0 mt-2 w-72 bg-[var(--background)]/95 backdrop-blur-xl rounded-xl border border-[var(--border)]/30 shadow-2xl overflow-hidden z-50"
+                                                >
+                                                    {/* User Info */}
+                                                    <div className="p-4 border-b border-[var(--border)]/20">
+                                                        <div className="flex items-center gap-3">
+                                                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--primary)]/20 to-[var(--accent)]/20 flex items-center justify-center border border-[var(--primary)]/30">
+                                                                <User size={18} className="text-[var(--primary)]" />
+                                                            </div>
+                                                            <div className="flex-1 min-w-0">
+                                                                <p className="text-sm font-semibold text-[var(--foreground)] truncate">
+                                                                    {user?.fullName || "User"}
+                                                                </p>
+                                                                <p className="text-xs text-[var(--muted-foreground)] truncate">
+                                                                    {user?.email || ""}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Balance Section */}
+                                                    <div className="p-4 border-b border-[var(--border)]/20">
+                                                        <div className="flex flex-col items-start justify-between">
+                                                            <div className="flex items-center gap-2">
+                                                                <Wallet size={16} className="text-[var(--primary)]" />
+                                                                <span className="text-sm text-[var(--muted-foreground)]">
+                                                                    Wallet Balance
+                                                                </span>
+                                                            </div>
+                                                            <div className="flex items-center gap-2">
+                                                                <p className="text-lg font-bold text-[var(--foreground)]">
+                                                                    ${maskBalance("0.00")}
+                                                                </p>
+                                                                <motion.button
+                                                                    whileTap={{ scale: 0.9 }}
+                                                                    onClick={() => setShowBalance(!showBalance)}
+                                                                    className="p-1 rounded hover:bg-[var(--primary)]/10"
+                                                                    aria-label={showBalance ? "Hide balance" : "Show balance"}
+                                                                >
+                                                                    {showBalance ? <EyeOff size={14} /> : <Eye size={14} />}
+                                                                </motion.button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Menu Items */}
+                                                    {/* <div className="py-2">
+                                                        {userMenuItems.map((item, index) => {
+                                                            const Icon = item.icon
+                                                            return (
+                                                                <motion.button
+                                                                    key={index}
+                                                                    whileHover={{ x: 5 }}
+                                                                    className="w-full flex items-center gap-3 px-4 py-3 text-sm text-[var(--foreground)] hover:bg-[var(--primary)]/5 transition-colors duration-200"
+                                                                    onClick={() => {
+                                                                        router.push(item.href)
+                                                                        setIsUserMenuOpen(false)
+                                                                    }}
+                                                                >
+                                                                    <Icon size={16} className="text-[var(--primary)]" />
+                                                                    {item.label}
+                                                                </motion.button>
+                                                            )
+                                                        })}
+                                                    </div> */}
+
+                                                    {/* Logout Button */}
+                                                    <div className="p-4 border-t border-[var(--border)]/20">
+                                                        <motion.button
+                                                            whileHover={{ scale: 1.02 }}
+                                                            whileTap={{ scale: 0.98 }}
+                                                            onClick={handleLogout}
+                                                            className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium text-red-500 hover:bg-red-500/10 rounded-lg transition-colors duration-200"
+                                                        >
+                                                            <LogOut size={16} />
+                                                            {loading ? "logging out..." : "Logout"}
+                                                        </motion.button>
+                                                    </div>
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+                                    </div>
                                 </div>
                             ) : (
                                 <div className="hidden lg:flex items-center gap-3">
@@ -207,12 +354,11 @@ const Navbar = () => {
                                         <button
                                             className="w-full flex items-center justify-between px-4 py-3 rounded-lg text-base font-medium hover:bg-[var(--primary)]/10 transition-colors duration-200"
                                             onClick={() => {
-                                                router.push(item.href);
-                                                setIsMobileMenuOpen(false);
+                                                router.push(item.href)
+                                                setIsMobileMenuOpen(false)
                                             }}
                                         >
                                             {item.label}
-
                                         </button>
                                     </div>
                                 ))}
@@ -222,29 +368,75 @@ const Navbar = () => {
                             <div className="mt-6 pt-6 border-t border-[var(--border)]/20">
                                 {isAuthedUser ? (
                                     <div className="space-y-4">
+                                        {/* User Info */}
                                         <div className="flex items-center justify-between">
                                             <div className="flex items-center gap-3">
-                                                <div className="p-2 rounded-full">
+                                                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--primary)]/20 to-[var(--accent)]/20 flex items-center justify-center border border-[var(--primary)]/30">
                                                     <User size={20} />
                                                 </div>
                                                 <div>
-                                                    <p className="text-sm font-medium">User Account</p>
-                                                    <p className="text-xs text-[var(--muted-foreground)]">Advertiser</p>
+                                                    <p className="text-sm font-medium">{user?.fullName || "User"}</p>
+                                                    <p className="text-xs text-[var(--muted-foreground)]">
+                                                        {formatEmail(user?.email || "")}
+                                                    </p>
                                                 </div>
                                             </div>
                                             <button className="p-2 rounded-lg hover:bg-[var(--primary)]/10">
                                                 <Bell size={20} />
                                             </button>
                                         </div>
-                                        <div className="p-4 rounded-xl">
-                                            <div className="flex items-center justify-between">
-                                                <div>
-                                                    <p className="text-xs text-[var(--muted-foreground)]">Advertiser Balance</p>
-                                                    <p className="text-lg font-semibold">$ 0.00</p>
+
+                                        {/* Balance Section */}
+                                        <div className="p-4 rounded-xl border border-[var(--border)]/30">
+                                            <div className="flex items-center justify-between mb-2">
+                                                <div className="flex items-center gap-2">
+                                                    <Wallet size={16} className="text-[var(--primary)]" />
+                                                    <span className="text-sm text-[var(--muted-foreground)]">Wallet Balance</span>
                                                 </div>
-                                                <Wallet size={20} className="text-[var(--primary)]" />
+                                                <motion.button
+                                                    whileTap={{ scale: 0.9 }}
+                                                    onClick={() => setShowBalance(!showBalance)}
+                                                    className="p-1 rounded hover:bg-[var(--primary)]/10"
+                                                    aria-label={showBalance ? "Hide balance" : "Show balance"}
+                                                >
+                                                    {showBalance ? <EyeOff size={14} /> : <Eye size={14} />}
+                                                </motion.button>
                                             </div>
+                                            <p className="text-xl font-bold text-[var(--foreground)]">
+                                                ${maskBalance("0.00")}
+                                            </p>
                                         </div>
+
+                                        {/* Mobile User Menu Items */}
+                                        {/* <div className="grid grid-cols-2 gap-2">
+                                            {userMenuItems.map((item, index) => {
+                                                const Icon = item.icon
+                                                return (
+                                                    <button
+                                                        key={index}
+                                                        className="flex flex-col items-center gap-1 p-3 rounded-lg border border-[var(--border)]/30 hover:bg-[var(--primary)]/5 transition-colors"
+                                                        onClick={() => {
+                                                            router.push(item.href)
+                                                            setIsMobileMenuOpen(false)
+                                                        }}
+                                                    >
+                                                        <Icon size={18} className="text-[var(--primary)]" />
+                                                        <span className="text-xs">{item.label}</span>
+                                                    </button>
+                                                )
+                                            })}
+                                        </div> */}
+
+                                        {/* Logout Button for Mobile */}
+                                        <motion.button
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
+                                            onClick={handleLogout}
+                                            className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium text-red-500 hover:bg-red-500/10 rounded-lg transition-colors duration-200 mt-4"
+                                        >
+                                            <LogOut size={16} />
+                                            {loading ? "Loggin out..." : "Logout"}
+                                        </motion.button>
                                     </div>
                                 ) : (
                                     <div className="grid grid-cols-2 gap-3">
@@ -252,7 +444,10 @@ const Navbar = () => {
                                             whileHover={{ scale: 1.02 }}
                                             whileTap={{ scale: 0.98 }}
                                             className="px-4 py-3 rounded-lg text-center border border-[var(--border)] hover:bg-[var(--primary)]/10 transition-colors duration-200"
-                                            onClick={() => router.push("/auth/log-in")}
+                                            onClick={() => {
+                                                router.push("/auth/log-in")
+                                                setIsMobileMenuOpen(false)
+                                            }}
                                         >
                                             Login
                                         </motion.button>
@@ -260,7 +455,10 @@ const Navbar = () => {
                                             whileHover={{ scale: 1.02 }}
                                             whileTap={{ scale: 0.98 }}
                                             className="px-4 py-3 rounded-lg bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] text-white font-medium"
-                                            onClick={() => router.push("/auth/sign-up")}
+                                            onClick={() => {
+                                                router.push("/auth/sign-up")
+                                                setIsMobileMenuOpen(false)
+                                            }}
                                         >
                                             Sign Up
                                         </motion.button>
