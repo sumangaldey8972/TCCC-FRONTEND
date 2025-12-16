@@ -166,7 +166,7 @@ const Navbar = () => {
                                 <div
                                     key={item.label}
                                     className="relative"
-                                    onClick={() => router.push(item.href)}
+                                    onClick={() => window.location.replace(item.href)}
                                 >
                                     <button
                                         className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium text-[var(--foreground)] hover:text-[var(--primary)] hover:bg-[var(--primary)]/10 transition-all duration-200 group"

@@ -3,6 +3,7 @@
 import RightSideNewsSection from "@/components/landing/RightSideNewsSection";
 import Scroll3DPageSwap from "@/components/landing/Scroll3DPageSwap";
 import DottedMapExtreme from "@/components/ui/dotted-map";
+import WorldMap from "@/components/ui/world-map";
 import { useAppSelector } from "@/store/hooks/hooks";
 import { useRouter } from "next/navigation";
 import { FaTelegramPlane, FaDiscord, FaArrowRight } from "react-icons/fa";
@@ -43,8 +44,9 @@ export default function Home() {
       <div className="relative min-h-screen overflow-hidden">
 
         {/* Background */}
-        <div className="absolute inset-0 -z-10 opacity-30 -top-30">
-          <DottedMapExtreme />
+        <div className="absolute inset-0 -z-10 -top-0">
+          {/* <DottedMapExtreme /> */}
+          <WorldMap />
         </div>
 
         {/* Hero Content */}
@@ -143,7 +145,7 @@ export default function Home() {
       </div>
 
 
-      {/* <Scroll3DPageSwap /> */}
+      <Scroll3DPageSwap />
 
     </>
   );
