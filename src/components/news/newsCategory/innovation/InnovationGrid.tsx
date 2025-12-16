@@ -1,16 +1,145 @@
+"use client"
+
 import { motion } from "framer-motion"
-import { Cpu, Heart, MessageCircle, Users } from "lucide-react"
+import { Cpu, Heart, MessageCircle, Users, FileSearch, Newspaper, Search } from "lucide-react"
 import { NewsItem } from "@/type/news.type"
+import { useRouter } from "next/navigation"
 
 interface InnovationGridProps {
     news: NewsItem[]
     innovationIcons: Array<{ icon: any; color: string }>
     onNewsClick: (item: NewsItem) => void
     getTimeAgo: (date: string) => string
+    subCategory?: string
 }
 
-const InnovationGrid = ({ news, innovationIcons, onNewsClick, getTimeAgo }: InnovationGridProps) => {
-    if (news.length === 0) return null
+const InnovationGrid = ({ news, innovationIcons, onNewsClick, getTimeAgo, subCategory }: InnovationGridProps) => {
+
+    const router = useRouter()
+
+    if (news.length === 0) {
+        return (
+            <div className="mb-12">
+                <div className="flex items-center justify-between mb-8">
+                    <div className="flex items-center gap-3">
+                        <div className="p-2 bg-gradient-to-r from-primary/10 to-primary/20 rounded-lg border border-primary/20">
+                            <Cpu className="w-6 h-6 text-primary" />
+                        </div>
+                        <h2 className="text-2xl md:text-xl font-normal text-foreground capitalize">
+                            {subCategory ? `${subCategory} News` : "Latest Innovations"}
+                        </h2>
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                        0 breakthrough stories
+                    </div>
+                </div>
+
+                {/* Empty State */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    className="relative"
+                >
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-purple-500/5 blur-2xl rounded-3xl" />
+
+                    <div className="relative bg-gradient-to-b from-background/80 to-background/60 backdrop-blur-sm rounded-2xl border-2 border-primary/20 p-12 text-center">
+                        <div className="max-w-md mx-auto">
+                            {/* Animated Empty State Icon */}
+                            <motion.div
+                                initial={{ scale: 0.8, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                transition={{ duration: 0.8, delay: 0.2 }}
+                                className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-primary/10 to-primary/5 rounded-full flex items-center justify-center border-2 border-primary/20"
+                            >
+                                <FileSearch className="w-12 h-12 text-primary" />
+                            </motion.div>
+
+                            {/* Empty State Title */}
+                            <motion.h3
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6, delay: 0.4 }}
+                                className="text-2xl font-bold text-foreground mb-3"
+                            >
+                                No {subCategory ? subCategory.toUpperCase() : "innovation"} news yet
+                            </motion.h3>
+
+                            {/* Empty State Description */}
+                            <motion.p
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 0.6, delay: 0.6 }}
+                                className="text-muted-foreground mb-8"
+                            >
+                                {subCategory
+                                    ? `We're working on bringing you the latest ${subCategory.toLowerCase()} news. Check back soon!`
+                                    : "Stay tuned! Our innovation stories are being prepared. Exciting content is coming your way."
+                                }
+                            </motion.p>
+
+                            {/* Suggestions or Actions */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6, delay: 0.8 }}
+                                className="flex flex-col sm:flex-row gap-4 justify-center"
+                            >
+                                <button
+                                    className="inline-flex items-center gap-2 px-6 py-3 bg-text-primary/5 text-foreground rounded-lg border border-primary/20 hover:border-primary/40 hover:bg-primary/15 transition-all duration-300"
+                                    onClick={() => window.location.reload()}
+                                >
+                                    <Search className="w-4 h-4" />
+                                    Refresh Page
+                                </button>
+                                <button
+                                    className="inline-flex items-center gap-2 px-6 py-3 bg-text-primary text-background font-medium rounded-lg hover:shadow-lg transition-all duration-300"
+                                    onClick={() => router.push("/news-blogs")}
+                                >
+                                    <Newspaper className="w-4 h-4" />
+                                    View Featured News
+                                </button>
+                            </motion.div>
+
+                            {/* Fun Animation Elements */}
+                            <div className="mt-8 flex justify-center gap-4 opacity-50">
+                                <motion.div
+                                    animate={{ y: [0, -10, 0] }}
+                                    transition={{ duration: 2, repeat: Infinity, delay: 0.1 }}
+                                >
+                                    <div className="w-2 h-2 bg-primary rounded-full" />
+                                </motion.div>
+                                <motion.div
+                                    animate={{ y: [0, -10, 0] }}
+                                    transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
+                                >
+                                    <div className="w-2 h-2 bg-purple-500 rounded-full" />
+                                </motion.div>
+                                <motion.div
+                                    animate={{ y: [0, -10, 0] }}
+                                    transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                                >
+                                    <div className="w-2 h-2 bg-blue-500 rounded-full" />
+                                </motion.div>
+                            </div>
+                        </div>
+                    </div>
+                </motion.div >
+
+                {/* Additional Empty State Info */}
+                < motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1 }}
+                    className="mt-8 text-center"
+                >
+                    <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
+                        ✨ Innovation news is updated daily. Follow us for updates when new content is published.
+                    </p>
+                </motion.div >
+            </div >
+        )
+    }
 
     return (
         <div className="mb-12">
@@ -19,8 +148,8 @@ const InnovationGrid = ({ news, innovationIcons, onNewsClick, getTimeAgo }: Inno
                     <div className="p-2 bg-gradient-to-r from-primary/10 to-primary/20 rounded-lg border border-primary/20">
                         <Cpu className="w-6 h-6 text-primary" />
                     </div>
-                    <h2 className="text-2xl md:text-3xl font-bold text-foreground">
-                        Latest Innovations
+                    <h2 className="text-2xl md:text-xl font-normal text-foreground capitalize">
+                        {subCategory ? `Latest ${subCategory} News` : "Latest Innovations News"}
                     </h2>
                 </div>
                 <div className="text-sm text-muted-foreground">

@@ -7,11 +7,12 @@ export async function GET(req: NextRequest) {
     const page = searchParams.get("page") ?? "1";
     const limit = searchParams.get("limit") ?? "10";
     const parentCategoryName = searchParams.get("parentCategoryName") ?? "";
+    const subCategoryName = searchParams.get("subCategoryName") ?? "";
 
-    console.log({ parentCategoryName, page, limit })
+    console.log({ parentCategoryName, subCategoryName, page, limit })
 
     try {
-        const backendRes = await apiClient.get(API_ENDPOINTS.news.get(parentCategoryName, page, limit));
+        const backendRes = await apiClient.get(API_ENDPOINTS.news.get(parentCategoryName, subCategoryName, page, limit));
 
         if (!backendRes?.data?.data) {
             return NextResponse.json(backendRes.data);
