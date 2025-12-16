@@ -1,8 +1,8 @@
 import apiClient from "@/lib/apiClient";
 import { API_ENDPOINTS } from "@/lib/config/apiConfig";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextResponse) {
+export async function GET(req: NextRequest) {
 
     const { searchParams } = new URL(req.url);
     const parentCategoryName = searchParams.get("parentCategoryName") ?? ""
