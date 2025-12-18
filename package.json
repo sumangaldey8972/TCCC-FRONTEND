@@ -35,6 +35,7 @@
     "react-redux": "^9.2.0",
     "recharts": "^3.2.1",
     "redux-persist": "^6.0.0",
+    "rough-notation": "^0.5.1",
     "sonner": "^2.0.7",
     "svg-dotted-map": "^2.0.1",
     "tailwind-merge": "^3.4.0",

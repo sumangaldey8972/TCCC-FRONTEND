@@ -5,6 +5,8 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import WhyChooseCoinCartel from "./WhyChooseUs";
 import Testimonials from "./Testimonials";
+import MultiPlatformReach from "./MultiPlatformReach";
+import AppLaunchNews from "./AppLaunchNews";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -176,7 +178,7 @@ export default function Scroll3DPageSwap() {
             <section
                 ref={addToRefs}
                 className="page3d-sec absolute inset-0 h-screen bg-background text-text-primary flex items-center justify-center"
-                style={{ zIndex: 10000 }}
+                style={{ zIndex: 100 }}
             >
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
                     {/* Subtle grid pattern */}
@@ -206,43 +208,35 @@ export default function Scroll3DPageSwap() {
             </section>
 
             {/* SECTION 3 */}
-            {/* <section
+            <section
                 ref={addToRefs}
-                className="page3d-sec absolute inset-0 h-screen bg-gradient-to-br from-[#0E0E0E] via-[#181818] to-[#222222] text-white flex items-center justify-center"
+                className="page3d-sec absolute inset-0 h-screen bg-background text-text-primary flex items-center justify-center"
+                style={{ zIndex: 200 }}
             >
-                <div className="text-center px-4 section-2">
-                    <h2 className="title text-4xl sm:text-5xl md:text-7xl font-light mb-6 opacity-0 translate-y-10">
-                        <span className="text-gray-400">02</span>
-                        <span className="block mt-2">Spatial<span className="text-blue-400"> Flow</span></span>
-                    </h2>
-                    <p className="subtitle max-w-2xl mx-auto text-gray-300 opacity-0 translate-y-5">
-                        Navigate through volumetric spaces with intuitive scroll-based interactions
-                    </p>
-                </div>
-
-                <div className="decorative-circle absolute top-20 left-20 w-40 h-40 border border-blue-500/20 rounded-full opacity-0" />
-                <div className="decorative-circle absolute bottom-20 right-20 w-56 h-56 border border-cyan-500/20 rounded-full opacity-0" />
-                <div className="decorative-circle absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 border border-white/10 rounded-full opacity-0" />
-            </section> */}
+                <MultiPlatformReach />
+            </section>
 
             {/* SECTION 4 */}
-            {/* <section
+            <section
                 ref={addToRefs}
-                className="page3d-sec absolute inset-0 h-screen bg-gradient-to-br from-[#101010] via-[#1A1A1A] to-[#242424] text-white flex items-center justify-center"
+                className="page3d-sec absolute inset-0 h-screen bg-background text-text-primary flex items-center justify-center"
+                style={{ zIndex: 300 }}
             >
-                <div className="text-center px-4 section-3">
-                    <h2 className="title text-4xl sm:text-5xl md:text-7xl font-light mb-6 opacity-0 translate-y-10">
-                        <span className="text-gray-400">03</span>
-                        <span className="block mt-2">Cinematic<span className="text-purple-400"> Motion</span></span>
-                    </h2>
-                    <p className="subtitle max-w-2xl mx-auto text-gray-300 opacity-0 translate-y-5">
-                        Professional-grade animations with bezier curves and anticipation
-                    </p>
+                {/* Animated Grid Pattern */}
+                <div className="absolute inset-0 opacity-10">
+                    <div
+                        className="absolute inset-0"
+                        style={{
+                            backgroundImage: `
+                                linear-gradient(to right, var(--text-primary) 1px, transparent 1px),
+                                linear-gradient(to bottom, var(--text-primary) 1px, transparent 1px)
+                            `,
+                            backgroundSize: '60px 60px',
+                        }}
+                    />
                 </div>
-
-                <div className="decorative-circle absolute top-40 right-40 w-64 h-64 bg-gradient-to-br from-purple-500/5 to-transparent rounded-full opacity-0" />
-                <div className="decorative-circle absolute bottom-40 left-40 w-48 h-48 bg-gradient-to-tr from-pink-500/5 to-transparent rounded-full opacity-0" />
-            </section> */}
+                <AppLaunchNews />
+            </section>
 
             {/* SECTION 5 */}
             {/* <section
