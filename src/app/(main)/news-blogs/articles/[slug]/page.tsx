@@ -146,7 +146,7 @@ const NewsDetailPage = () => {
     const handleShare = () => {
         if (newsData) {
             const url = `https://thecoincartel.com/news/${slug}`;
-            const shareText = `🚀 Check out this crypto news on The Coin Cartel: ${url}`;
+            const shareText = `🚀 Check out this crypto news on The Cartel: ${url}`;
             window.open(
                 `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`,
                 "_blank"

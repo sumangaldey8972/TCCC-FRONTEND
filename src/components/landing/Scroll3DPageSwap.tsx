@@ -3,6 +3,8 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import WhyChooseCoinCartel from "./WhyChooseUs";
+import Testimonials from "./Testimonials";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -169,57 +171,42 @@ export default function Scroll3DPageSwap() {
 
     return (
         <div ref={containerRef} className="relative w-full h-screen overflow-hidden bg-black">
-            {/* Instruction */}
-            <div
-                ref={instructionRef}
-                className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 text-gray-400 text-sm flex items-center gap-2 animate-pulse"
-            >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                </svg>
-                Scroll to explore
-            </div>
 
             {/* SECTION 1 - Starting Section */}
             <section
                 ref={addToRefs}
-                className="page3d-sec absolute inset-0 h-screen bg-gradient-to-br from-[#0A0A0A] via-[#111111] to-[#1A1A1A] text-white flex items-center justify-center"
+                className="page3d-sec absolute inset-0 h-screen bg-background text-text-primary flex items-center justify-center"
+                style={{ zIndex: 10000 }}
             >
-                <div className="text-center px-4 section-0">
-                    <h1 className="title text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-light mb-6 tracking-tighter">
-                        Immersive<span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Experience</span>
-                    </h1>
-                    <p className="subtitle text-lg sm:text-xl text-gray-300">
-                        Next-generation 3D scroll interaction
-                    </p>
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    {/* Subtle grid pattern */}
+                    <div className="absolute inset-0 opacity-[0.05]" style={{
+                        backgroundImage: `linear-gradient(to right, var(--text-primary) 1px, transparent 1px),
+                                   linear-gradient(to bottom, var(--text-primary) 1px, transparent 1px)`,
+                        backgroundSize: '30px 30px',
+                    }} />
                 </div>
-
-                {/* Decorative elements */}
-                <div className="decorative-circle absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-br from-cyan-500/10 to-transparent rounded-full blur-3xl" />
-                <div className="decorative-circle absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-tr from-purple-500/10 to-transparent rounded-full blur-3xl" />
+                <WhyChooseCoinCartel />
             </section>
 
             {/* SECTION 2 */}
             <section
                 ref={addToRefs}
-                className="page3d-sec absolute inset-0 h-screen bg-gradient-to-br from-[#0C0C0C] via-[#151515] to-[#1E1E1E] text-white flex items-center justify-center"
+                className="page3d-sec absolute inset-0 h-screen bg-background text-text-primary flex items-center justify-center"
             >
-                <div className="text-center px-4 section-1">
-                    <h2 className="title text-4xl sm:text-5xl md:text-7xl font-light mb-6 opacity-0 translate-y-10">
-                        <span className="text-gray-400">01</span>
-                        <span className="block mt-2">Dynamic<span className="text-cyan-400"> Depth</span></span>
-                    </h2>
-                    <p className="subtitle max-w-2xl mx-auto text-gray-300 opacity-0 translate-y-5">
-                        Experience multi-layered 3D transitions with parallax effects and smooth animations
-                    </p>
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    {/* Subtle grid pattern */}
+                    <div className="absolute inset-0 opacity-[0.05]" style={{
+                        backgroundImage: `linear-gradient(to right, var(--text-primary) 1px, transparent 1px),
+                                   linear-gradient(to bottom, var(--text-primary) 1px, transparent 1px)`,
+                        backgroundSize: '30px 30px',
+                    }} />
                 </div>
-
-                <div className="decorative-circle absolute top-1/3 right-1/4 w-48 h-48 border border-cyan-500/30 rounded-full opacity-0" />
-                <div className="decorative-circle absolute bottom-1/3 left-1/4 w-32 h-32 border border-purple-500/30 rounded-full opacity-0" />
+                <Testimonials />
             </section>
 
             {/* SECTION 3 */}
-            <section
+            {/* <section
                 ref={addToRefs}
                 className="page3d-sec absolute inset-0 h-screen bg-gradient-to-br from-[#0E0E0E] via-[#181818] to-[#222222] text-white flex items-center justify-center"
             >
@@ -236,10 +223,10 @@ export default function Scroll3DPageSwap() {
                 <div className="decorative-circle absolute top-20 left-20 w-40 h-40 border border-blue-500/20 rounded-full opacity-0" />
                 <div className="decorative-circle absolute bottom-20 right-20 w-56 h-56 border border-cyan-500/20 rounded-full opacity-0" />
                 <div className="decorative-circle absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 border border-white/10 rounded-full opacity-0" />
-            </section>
+            </section> */}
 
             {/* SECTION 4 */}
-            <section
+            {/* <section
                 ref={addToRefs}
                 className="page3d-sec absolute inset-0 h-screen bg-gradient-to-br from-[#101010] via-[#1A1A1A] to-[#242424] text-white flex items-center justify-center"
             >
@@ -255,10 +242,10 @@ export default function Scroll3DPageSwap() {
 
                 <div className="decorative-circle absolute top-40 right-40 w-64 h-64 bg-gradient-to-br from-purple-500/5 to-transparent rounded-full opacity-0" />
                 <div className="decorative-circle absolute bottom-40 left-40 w-48 h-48 bg-gradient-to-tr from-pink-500/5 to-transparent rounded-full opacity-0" />
-            </section>
+            </section> */}
 
             {/* SECTION 5 */}
-            <section
+            {/* <section
                 ref={addToRefs}
                 className="page3d-sec absolute inset-0 h-screen bg-gradient-to-br from-[#121212] via-[#1C1C1C] to-[#262626] text-white flex items-center justify-center"
             >
@@ -274,10 +261,10 @@ export default function Scroll3DPageSwap() {
 
                 <div className="decorative-circle absolute top-1/4 left-1/3 w-72 h-72 border border-pink-500/15 rounded-full opacity-0" />
                 <div className="decorative-circle absolute bottom-1/3 right-1/3 w-36 h-36 border border-cyan-500/15 rounded-full opacity-0" />
-            </section>
+            </section> */}
 
             {/* SECTION 6 */}
-            <section
+            {/* <section
                 ref={addToRefs}
                 className="page3d-sec absolute inset-0 h-screen bg-gradient-to-br from-[#141414] via-[#1E1E1E] to-[#282828] text-white flex items-center justify-center"
             >
@@ -292,24 +279,8 @@ export default function Scroll3DPageSwap() {
                         Redefining scroll experiences with advanced 3D transformations
                     </p>
                 </div>
-
-                {/* Multiple decorative elements */}
-                {[...Array(5)].map((_, i) => (
-                    <div
-                        key={i}
-                        className={`decorative-circle absolute ${i === 0 ? 'top-10 left-10 w-16 h-16' :
-                            i === 1 ? 'top-20 right-20 w-24 h-24' :
-                                i === 2 ? 'bottom-20 left-20 w-32 h-32' :
-                                    i === 3 ? 'bottom-10 right-10 w-20 h-20' :
-                                        'top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48'
-                            } border ${i % 3 === 0 ? 'border-cyan-500/10' :
-                                i % 3 === 1 ? 'border-blue-500/10' :
-                                    'border-purple-500/10'
-                            } rounded-full opacity-0`}
-                    />
-                ))}
                 <div className="decorative-circle absolute inset-0 m-auto w-[80vh] h-[80vh] border border-white/5 rounded-full opacity-0" />
-            </section>
+            </section> */}
         </div>
     );
 }

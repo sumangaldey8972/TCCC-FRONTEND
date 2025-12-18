@@ -56,7 +56,7 @@ export default function Home() {
           <div className="space-y-6 md:space-y-8">
             <div>
               <h1 className="text-5xl font-light leading-tight tracking-tight">
-                <span className="gold-embossed">The Coin Cartel Club —</span>
+                <span className="gold-embossed">The Cartel Club —</span>
                 <br />
                 <span className="text-text-primary font-thinner">
                   Your Gateway to Crypto News, Advertising & Growth
@@ -73,7 +73,7 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full max-w-2xl">
-              <button onClick={() => router.push("/consult-with-us")} className="group relative overflow-hidden px-6 py-4 text-base font-medium bg-text-primary/90 text-background rounded-lg transition-all duration-300 ease-out hover:scale-[1.02] active:scale-95 shadow-lg hover:shadow-xl">
+              <button onClick={() => window.location.replace("/consult-with-us")} className="group relative overflow-hidden px-6 py-4 text-base font-medium bg-text-primary/90 text-background rounded-lg transition-all duration-300 ease-out hover:scale-[1.02] active:scale-95 shadow-lg hover:shadow-xl">
                 <span className="relative z-10 flex items-center justify-center gap-2">
                   CONSULT WITH US
                   <FaArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -81,7 +81,7 @@ export default function Home() {
                 <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </button>
 
-              <button onClick={() => router.push("/advertise-with-us")} className="bg-background group relative overflow-hidden px-6 py-4 text-base font-medium border-2 border-text-primary/30 text-text-primary rounded-lg transition-all duration-300 ease-out hover:scale-[1.02] active:scale-95 hover:border-text-primary/60 hover:bg-background/90">
+              <button onClick={() => window.location.replace("/advertise-with-us")} className="bg-background group relative overflow-hidden px-6 py-4 text-base font-medium border-2 border-text-primary/30 text-text-primary rounded-lg transition-all duration-300 ease-out hover:scale-[1.02] active:scale-95 hover:border-text-primary/60 hover:bg-background/90">
                 <span className="relative z-10">ADVERTISE WITH US</span>
               </button>
             </div>
@@ -96,7 +96,7 @@ export default function Home() {
         </section>
 
         {/* Social Media Section - Compact */}
-        <section className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <section className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-6 md:mb-8 text-center">
             <h2 className="text-2xl md:text-3xl font-light mb-2 text-text-primary">
               Connect With Us
@@ -107,7 +107,7 @@ export default function Home() {
           </div>
 
           {/* Compact Social Links - Horizontal Layout */}
-          <div className="flex flex-wrap justify-center gap-3 md:gap-4">
+          <div className="hidden md:flex flex-wrap justify-center gap-3 md:gap-4">
             {socialLinks.map((platform) => (
               <a
                 key={platform.name}

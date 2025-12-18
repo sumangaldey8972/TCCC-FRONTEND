@@ -94,7 +94,7 @@ export default function Footer() {
                                 />
                             </div>
                             <div>
-                                <h3 className="text-xl font-bold tracking-tight gold-embossed">The Coin Cartel</h3>
+                                <h3 className="text-xl font-bold tracking-tight gold-embossed">The Cartel</h3>
                             </div>
                         </div>
 
@@ -344,7 +344,7 @@ export default function Footer() {
                         <div className="text-text-primary/50 text-sm text-center md:text-left">
                             <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
                                 <FaRegCopyright className="w-3 h-3" />
-                                <span>{new Date().getFullYear()} The Coin Cartel Club. All rights reserved.</span>
+                                <span>{new Date().getFullYear()} The Cartel Club. All rights reserved.</span>
                             </div>
                         </div>
 

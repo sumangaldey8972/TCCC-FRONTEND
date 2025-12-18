@@ -166,7 +166,7 @@ export default function CommunityComingSoon() {
                         </motion.div>
 
                         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                            <span className="block">The Coin Cartel</span>
+                            <span className="block">The Cartel</span>
                             <span className="block text-text-primary/80">Community</span>
                         </h1>
 
@@ -183,7 +183,7 @@ export default function CommunityComingSoon() {
                         className="mb-16"
                     >
                         <h2 className="text-2xl lg:text-3xl font-bold text-center mb-10">
-                            Why The Coin Cartel Community?
+                            Why The Cartel Community?
                         </h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {features.map((feature, index) => (

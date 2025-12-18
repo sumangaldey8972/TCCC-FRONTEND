@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "The Coin Cartel",
+    title: "The Cartel",
     other: {
         "the-coin-cartel": "24cda809b6ff"
     }

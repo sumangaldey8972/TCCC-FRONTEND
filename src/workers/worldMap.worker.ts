@@ -3,7 +3,6 @@ import DottedMap from "dotted-map";
 
 self.onmessage = (e) => {
     const { theme, dots } = e.data;
-    console.log({ theme, dots })
     const map = new DottedMap({ height: 100, grid: "diagonal" });
 
     const svgMap = map.getSVG({

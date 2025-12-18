@@ -156,7 +156,7 @@ const Navbar = () => {
                             </motion.div>
 
                             <span className="text-lg font-bold gold-embossed">
-                                The Coin Cartel
+                                The Cartel
                             </span>
                         </motion.div>
 
@@ -270,7 +270,7 @@ const Navbar = () => {
                                                                     whileHover={{ x: 5 }}
                                                                     className="w-full flex items-center gap-3 px-4 py-3 text-sm text-[var(--foreground)] hover:bg-[var(--primary)]/5 transition-colors duration-200"
                                                                     onClick={() => {
-                                                                        router.push(item.href)
+                                                                        window.location.replace(item.href)
                                                                         setIsUserMenuOpen(false)
                                                                     }}
                                                                 >
@@ -304,7 +304,7 @@ const Navbar = () => {
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}
                                         className="px-4 py-2 rounded-lg text-sm font-medium hover:text-[var(--primary)] transition-colors duration-200"
-                                        onClick={() => router.push("/auth/log-in")}
+                                        onClick={() => window.location.replace("/auth/log-in")}
                                     >
                                         Login
                                     </motion.button>
@@ -354,7 +354,7 @@ const Navbar = () => {
                                         <button
                                             className="w-full flex items-center justify-between px-4 py-3 rounded-lg text-base font-medium hover:bg-[var(--primary)]/10 transition-colors duration-200"
                                             onClick={() => {
-                                                router.push(item.href)
+                                                window.location.replace(item.href)
                                                 setIsMobileMenuOpen(false)
                                             }}
                                         >
@@ -416,7 +416,7 @@ const Navbar = () => {
                                                         key={index}
                                                         className="flex flex-col items-center gap-1 p-3 rounded-lg border border-[var(--border)]/30 hover:bg-[var(--primary)]/5 transition-colors"
                                                         onClick={() => {
-                                                            router.push(item.href)
+                                                            window.location.replace(item.href)
                                                             setIsMobileMenuOpen(false)
                                                         }}
                                                     >
@@ -445,7 +445,7 @@ const Navbar = () => {
                                             whileTap={{ scale: 0.98 }}
                                             className="px-4 py-3 rounded-lg text-center border border-[var(--border)] hover:bg-[var(--primary)]/10 transition-colors duration-200"
                                             onClick={() => {
-                                                router.push("/auth/log-in")
+                                                window.location.replace("/auth/log-in")
                                                 setIsMobileMenuOpen(false)
                                             }}
                                         >
@@ -456,7 +456,7 @@ const Navbar = () => {
                                             whileTap={{ scale: 0.98 }}
                                             className="px-4 py-3 rounded-lg bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] text-white font-medium"
                                             onClick={() => {
-                                                router.push("/auth/sign-up")
+                                                window.location.replace("/auth/sign-up")
                                                 setIsMobileMenuOpen(false)
                                             }}
                                         >
