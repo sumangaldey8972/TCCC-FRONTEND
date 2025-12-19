@@ -169,20 +169,33 @@ export default function WhyChooseCoinCartel() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className="
-                                    relative px-8 sm:px-10 py-4 sm:py-5 rounded-xl
-                                    bg-gradient-to-r from-text-primary to-text-primary/90
-                                    text-background text-sm sm:text-base font-semibold tracking-wide
-                                    shadow-lg hover:shadow-xl hover:shadow-yellow-500/20
-                                    transition-all duration-300
-                                    group
-                                "
+    relative px-8 sm:px-10 py-4 sm:py-5 rounded-xl
+    bg-gradient-to-r from-text-primary to-text-primary/90
+    text-background text-sm sm:text-base font-semibold tracking-wide
+    shadow-lg hover:shadow-xl hover:shadow-yellow-500/20
+    transition-all duration-300
+    group overflow-hidden
+  "
                     >
+                        {/* Hover glow */}
                         <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-yellow-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                        {/* Text Wrapper */}
                         <span className="relative flex items-center justify-center gap-2">
-                            Launch Campaign
-                            <Zap className="w-4 h-4 animate-pulse group-hover:animate-none group-hover:rotate-12 transition-transform" />
+                            {/* Default text */}
+                            <span className="flex items-center gap-2 group-hover:opacity-0 transition-opacity duration-200">
+                                Launch Campaign
+                                <Zap className="w-4 h-4 animate-pulse group-hover:animate-none group-hover:rotate-12 transition-transform" />
+                            </span>
+
+                            {/* Hover text */}
+                            <span className="absolute flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                Coming Soon
+                                <Zap className="w-4 h-4 text-yellow-400" />
+                            </span>
                         </span>
                     </motion.button>
+
 
                 </div>
 

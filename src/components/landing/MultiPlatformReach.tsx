@@ -14,12 +14,12 @@ import { FaXTwitter } from "react-icons/fa6";
 import BackgroundGlobe from "../ui/BackgroundGlobe";
 
 const platforms = [
-    {
-        name: "LinkedIn",
-        icon: FiLinkedin,
-        color: "#0077B5",
-        description: "Professional Network & B2B Outreach"
-    },
+    // {
+    //     name: "LinkedIn",
+    //     icon: FiLinkedin,
+    //     color: "#0077B5",
+    //     description: "Professional Network & B2B Outreach"
+    // },
     {
         name: "Binance",
         icon: SiBinance,
@@ -92,7 +92,7 @@ export default function MultiPlatformReach() {
                 </motion.div>
 
                 {/* Enhanced Platforms Grid */}
-                <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-6 relative">
+                <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-6 relative">
                     {platforms.map((platform, index) => {
                         const Icon = platform.icon;
                         const isHovered = hoveredPlatform === platform.name;
@@ -117,7 +117,7 @@ export default function MultiPlatformReach() {
                                 onMouseEnter={() => setHoveredPlatform(platform.name)}
                                 onMouseLeave={() => setHoveredPlatform("")}
                                 className={`
-                relative rounded-2xl border border-text-primary/20
+                relative rounded-md md:rounded-2xl border border-text-primary/20
                 bg-gradient-to-br from-white/5 to-white/[0.02]
                 backdrop-blur-sm backdrop-saturate-50
                 p-2 md:p-5 text-center group

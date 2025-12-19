@@ -6,7 +6,7 @@ const BackgroundGlobe = memo(function BackgroundGlobe() {
         <div
             aria-hidden="true"
             className="
-        absolute top-1/2 right-[20%] -translate-y-1/2
+        absolute top-1/2 right-[10%] -translate-y-1/2
         w-[700px] h-[700px]
         opacity-50
         pointer-events-none

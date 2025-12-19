@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
@@ -16,11 +16,15 @@ import {
 import { FaXTwitter } from "react-icons/fa6";
 import { FiMail, FiSend } from "react-icons/fi";
 import logo from "@/assets/logo_svg.png"
+import { CategoryInterface } from "@/type/category.type";
+import appClient from "@/lib/appClient";
 
 export default function Footer() {
     const [email, setEmail] = useState("");
     const [subscribed, setSubscribed] = useState(false);
     const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+    const [data, setData] = useState<CategoryInterface[]>([])
+    const [loading, setLoading] = useState(false)
 
     const handleSubscribe = (e: React.FormEvent) => {
         e.preventDefault();
@@ -49,12 +53,11 @@ export default function Footer() {
         { label: "Educational Guides", href: "#" },
     ];
 
-    const projectLinks = [
-        { label: "Advertise With Us", href: "#" },
-        { label: "Press Releases", href: "#" },
-        { label: "Media Coverage", href: "#" },
-        { label: "Strategic Partnerships", href: "#" },
-        { label: "Brand Collaboration", href: "#" },
+    const quickLinks = [
+        { label: "Advertise With Us", href: "/advertise-with-us" },
+        { label: "Publisher", href: "/become-a-publisher" },
+        { label: "Crypto Price Prediction", href: "/crypto-prediction" },
+        { label: "Brand Collaboration", href: "/consult-with-us" },
     ];
 
     const companyLinks = [
@@ -64,6 +67,45 @@ export default function Footer() {
         { label: "Terms of Service", href: "#" },
         { label: "Cookie Policy", href: "#" },
     ];
+
+
+    const handleCategories = useCallback(async () => {
+        setLoading(true);
+        try {
+            const response = await appClient.get("/api/category/get", {
+                params: {
+                    search: "",
+                    page: 1,
+                    limit: 100,
+                    isActive: true,
+                    sortBy: 'name',
+                    sortOrder: 'asc'
+                },
+            });
+
+            if (response.data.status) {
+                const allCategories = response.data.categories.docs;
+                const parentCategories = allCategories.filter(
+                    (category: CategoryInterface) =>
+                        !category.parent || category.parent === null
+                );
+
+                const featured = allCategories.filter(
+                    (category: CategoryInterface) => category.isFeatured
+                );
+
+                setData(parentCategories);
+            }
+        } catch (error) {
+            console.log("getting error while category list", error);
+        } finally {
+            setLoading(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        handleCategories();
+    }, [handleCategories]);
 
     return (
         <footer className="bg-background text-text-primary mt-20">
@@ -177,22 +219,22 @@ export default function Footer() {
                         {/* Explore */}
                         <div className="space-y-4">
                             <h4 className="text-text-primary font-semibold text-base relative inline-block">
-                                Explore
+                                News
                                 <span className="absolute -bottom-1 left-0 w-8 h-0.5 bg-text-primary/30 rounded-full" />
                             </h4>
                             <ul className="space-y-2.5">
-                                {exploreLinks.map((link) => (
+                                {data.map((cat) => (
                                     <motion.li
-                                        key={link.label}
+                                        key={cat._id}
                                         whileHover={{ x: 5 }}
                                         className="group"
                                     >
                                         <a
-                                            href={link.href}
-                                            className="flex items-center text-text-primary/70 hover:text-text-primary text-sm transition-colors"
+                                            href={`/news-blogs/${cat.name}`}
+                                            className="capitalize flex items-center text-text-primary/70 hover:text-text-primary text-sm transition-colors"
                                         >
                                             <FaArrowRight className="w-3 h-3 mr-2 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
-                                            {link.label}
+                                            {cat.name}
                                         </a>
                                     </motion.li>
                                 ))}
@@ -202,11 +244,11 @@ export default function Footer() {
                         {/* For Projects */}
                         <div className="space-y-4">
                             <h4 className="text-text-primary font-semibold text-base relative inline-block">
-                                For Projects
+                                Quick links
                                 <span className="absolute -bottom-1 left-0 w-8 h-0.5 bg-text-primary/30 rounded-full" />
                             </h4>
                             <ul className="space-y-2.5">
-                                {projectLinks.map((link) => (
+                                {quickLinks.map((link) => (
                                     <motion.li
                                         key={link.label}
                                         whileHover={{ x: 5 }}

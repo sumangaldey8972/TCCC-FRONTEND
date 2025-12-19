@@ -178,7 +178,7 @@ export default function Scroll3DPageSwap() {
             <section
                 ref={addToRefs}
                 className="page3d-sec absolute inset-0 h-screen bg-background text-text-primary flex items-center justify-center"
-                style={{ zIndex: 100 }}
+                style={{ zIndex: 600 }}
             >
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
                     {/* Subtle grid pattern */}

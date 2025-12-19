@@ -56,7 +56,7 @@ export default function Home() {
           <div className="space-y-6 md:space-y-8">
             <div>
               <h1 className="text-5xl font-light leading-tight tracking-tight">
-                <span className="gold-embossed">The Cartel Club —</span>
+                <span className="gold-embossed">The Coin Cartel Club —</span>
                 <br />
                 <span className="text-text-primary font-thinner">
                   Your Gateway to Crypto News, Advertising & Growth
@@ -68,20 +68,20 @@ export default function Home() {
               Join the Cartel and maximize your reach in the crypto ecosystem.
             </p>
 
-            <p className="text-lg md:text-xl font-medium text-text-primary">
+            <p className="text-lg md:text-xl text-text-primary">
               Your Gateway to Crypto Media & Market Intelligence.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full max-w-2xl">
-              <button onClick={() => window.location.replace("/consult-with-us")} className="group relative overflow-hidden px-6 py-4 text-base font-medium bg-text-primary/90 text-background rounded-lg transition-all duration-300 ease-out hover:scale-[1.02] active:scale-95 shadow-lg hover:shadow-xl">
+            <div className="flex flex-row items-stretch sm:items-center gap-4 w-full max-w-2xl">
+              <button onClick={() => window.location.replace("/consult-with-us")} className="group relative overflow-hidden px-2 md:px-6 py-2 md:py-4 text-xs md:text-base font-medium bg-text-primary/90 text-background rounded-sm md:rounded-lg transition-all duration-300 ease-out hover:scale-[1.02] active:scale-95 shadow-lg hover:shadow-xl">
                 <span className="relative z-10 flex items-center justify-center gap-2">
                   CONSULT WITH US
-                  <FaArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  <FaArrowRight className="w-2 h-2 md:w-4 md:h-4 transition-transform group-hover:translate-x-1" />
                 </span>
                 <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </button>
 
-              <button onClick={() => window.location.replace("/advertise-with-us")} className="bg-background group relative overflow-hidden px-6 py-4 text-base font-medium border-2 border-text-primary/30 text-text-primary rounded-lg transition-all duration-300 ease-out hover:scale-[1.02] active:scale-95 hover:border-text-primary/60 hover:bg-background/90">
+              <button onClick={() => window.location.replace("/advertise-with-us")} className="bg-background group relative overflow-hidden px-2 md:px-6 py-2 md:py-4 text-xs md:text-base font-medium border-2 border-text-primary/30 text-text-primary rounded-sm md:rounded-lg transition-all duration-300 ease-out hover:scale-[1.02] active:scale-95 hover:border-text-primary/60 hover:bg-background/90">
                 <span className="relative z-10">ADVERTISE WITH US</span>
               </button>
             </div>
