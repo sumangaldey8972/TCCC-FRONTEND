@@ -38,10 +38,11 @@ const Navbar = () => {
 
     const navItems = [
         { label: "Publisher", href: "/become-a-publisher" },
-        { label: "NFTs", href: "#" },
-        { label: "Crypto Prediction", href: "/crypto-prediction" },
         { label: "News | Blogs", href: "/news-blogs" },
-        { label: "Marketplace", href: "/#" },
+        { label: "NFTs", href: "/nfts" },
+        { label: "Crypto Prediction", href: "/crypto-prediction" },
+        { label: "Marketplace", href: "/marketplace" },
+        { label: "Advertiser", href: "/become-a-advertiser" },
     ]
 
     // User menu items (can be expanded later)

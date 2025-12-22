@@ -361,16 +361,7 @@ export default function Footer() {
                                     <div className="w-6 h-6 rounded bg-text-primary/5 flex items-center justify-center group-hover:bg-text-primary/10 transition-colors">
                                         <span className="text-xs">📧</span>
                                     </div>
-                                    support@thecoincartel.club
-                                </a>
-                                <a
-                                    href="mailto:partnerships@thecoincartel.club"
-                                    className="flex items-center gap-2 text-text-primary/70 hover:text-text-primary text-sm transition-colors group"
-                                >
-                                    <div className="w-6 h-6 rounded bg-text-primary/5 flex items-center justify-center group-hover:bg-text-primary/10 transition-colors">
-                                        <span className="text-xs">🤝</span>
-                                    </div>
-                                    partnerships@thecoincartel.club
+                                    thecartel@samdigitalsolutions.ai
                                 </a>
                             </div>
                         </div>

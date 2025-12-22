@@ -382,9 +382,9 @@ const Page = () => {
                                                             className="w-full pl-11 pr-4 py-3 bg-background border border-text-primary/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-text-primary/20 focus:border-text-primary/40 text-text-primary/90 text-sm appearance-none"
                                                         >
                                                             <option value="publisher">Publisher</option>
-                                                            {/* <option value="advertiser" disabled>
+                                                            <option value="advertiser" disabled>
                                                                 Advertiser (Coming Soon)
-                                                            </option> */}
+                                                            </option>
                                                         </select>
                                                         <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
                                                             <svg className="w-5 h-5 text-text-primary/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">

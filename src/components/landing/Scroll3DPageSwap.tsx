@@ -222,19 +222,7 @@ export default function Scroll3DPageSwap() {
                 className="page3d-sec absolute inset-0 h-screen bg-background text-text-primary flex items-center justify-center"
                 style={{ zIndex: 300 }}
             >
-                {/* Animated Grid Pattern */}
-                <div className="absolute inset-0 opacity-10">
-                    <div
-                        className="absolute inset-0"
-                        style={{
-                            backgroundImage: `
-                                linear-gradient(to right, var(--text-primary) 1px, transparent 1px),
-                                linear-gradient(to bottom, var(--text-primary) 1px, transparent 1px)
-                            `,
-                            backgroundSize: '60px 60px',
-                        }}
-                    />
-                </div>
+
                 <AppLaunchNews />
             </section>
 

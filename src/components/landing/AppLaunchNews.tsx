@@ -4,43 +4,13 @@ import { motion } from "framer-motion";
 import { FaGooglePlay, FaApple } from "react-icons/fa";
 import { FiDownload, FiSmartphone, FiTrendingUp, FiBell } from "react-icons/fi";
 import { useEffect, useState } from "react";
+import BackgroundGlobe from "../ui/BackgroundGlobe";
 
 export default function AppLaunchNews() {
 
     return (
         <section className="relative bg-background py-16 sm:py-24 overflow-hidden">
-            {/* Animated Background Elements */}
-            <div className="absolute inset-0 overflow-hidden">
-                {/* Gradient Orbs */}
-                <div className="absolute -top-20 -right-20 w-80 h-80 bg-text-primary/5 rounded-full blur-3xl" />
-                <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-text-primary/5 rounded-full blur-3xl" />
-
-
-
-                {/* Floating App Icons */}
-                {[...Array(6)].map((_, i) => (
-                    <motion.div
-                        key={i}
-                        className="absolute text-text-primary/10"
-                        style={{
-                            left: `${20 + (i * 15)}%`,
-                            top: `${20 + (Math.sin(i) * 30)}%`,
-                        }}
-                        animate={{
-                            y: [0, -20, 0],
-                            rotate: [0, 5, 0],
-                        }}
-                        transition={{
-                            duration: 4,
-                            repeat: Infinity,
-                            delay: i * 0.5,
-                            ease: "easeInOut"
-                        }}
-                    >
-                        <FiSmartphone className="w-12 h-12" />
-                    </motion.div>
-                ))}
-            </div>
+            <BackgroundGlobe />
 
             <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
                 {/* Enhanced Heading */}
