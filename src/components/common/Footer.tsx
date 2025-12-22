@@ -61,11 +61,10 @@ export default function Footer() {
     ];
 
     const companyLinks = [
-        { label: "About Us", href: "#" },
-        { label: "Careers", href: "#" },
-        { label: "Privacy Policy", href: "#" },
-        { label: "Terms of Service", href: "#" },
-        { label: "Cookie Policy", href: "#" },
+        { label: "About Us", href: "/about-us" },
+        { label: "Careers", href: "/careers" },
+        { label: "Privacy Policy", href: "/privacy-policy" },
+        { label: "Terms of Service", href: "/terms-of-services" },
     ];
 
 
@@ -141,7 +140,7 @@ export default function Footer() {
                         </div>
 
                         <p className="text-text-primary/70 text-sm leading-relaxed">
-                            Your gateway to crypto insights, market intelligence, token visibility,
+                            Your gateway to crypto news, market intelligence, token visibility,
                             and blockchain media growth.
                         </p>
                         {/* {https://samdigitalsolutions.ae/sds_logo_transparent.png } */}

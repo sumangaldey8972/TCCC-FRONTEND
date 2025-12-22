@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { useTheme } from "@/providers/ThemeProvider";
 
 interface MapProps {
@@ -44,7 +44,8 @@ export default function WorldMap({
       start: { lat: 28.6139, lng: 77.209 }, // New Delhi
       end: { lat: -1.2921, lng: 36.8219 }, // Nairobi
     },
-  ],
+  ]
+
 }: MapProps) {
   const { theme } = useTheme();
   const workerRef = useRef<Worker | null>(null);
@@ -52,7 +53,7 @@ export default function WorldMap({
   const [svgMap, setSvgMap] = useState<string>("");
   const [paths, setPaths] = useState<any[]>([]);
 
-  let lineColor = theme === "light" ? "#0000007c" : "#ffffff65"
+  let lineColor = theme === "light" ? "#000000ff" : "#ffffffff";
 
   useEffect(() => {
     workerRef.current = new Worker(
@@ -72,13 +73,13 @@ export default function WorldMap({
   }, [theme, dots]);
 
   return (
-    <div className={`w-full rounded-lg relative bg-transparent`}>
+    <div className={`w-full rounded-lg relative bg-transparent overflow-hidden`}>
       {svgMap && (
         <img
           src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
           className="w-full h-full pointer-events-none select-none"
           alt="world map"
-          draggable={true}
+          draggable={false}
         />
       )}
 
@@ -87,47 +88,64 @@ export default function WorldMap({
         className="absolute inset-0 w-full h-full pointer-events-none"
       >
         <defs>
-          <linearGradient id="path-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="white" stopOpacity="0" />
-            <stop offset="5%" stopColor={lineColor} />
-            <stop offset="95%" stopColor={lineColor} />
-            <stop offset="100%" stopColor="white" stopOpacity="0" />
+          {/* Single clean network beam */}
+          <linearGradient id="clean-beam" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor={lineColor} stopOpacity="0" />
+            <stop offset="20%" stopColor={lineColor} stopOpacity="0.7" />
+            <stop offset="80%" stopColor={lineColor} stopOpacity="0.7" />
+            <stop offset="100%" stopColor={lineColor} stopOpacity="0" />
           </linearGradient>
         </defs>
 
         {paths.map((p, i) => (
           <g key={i}>
+            {/* Base network line - very faint */}
+            <path
+              d={p.path}
+              fill="none"
+              stroke={lineColor}
+              strokeWidth="0.3"
+              strokeOpacity="0.08"
+            />
+
+            {/* Long thin network data beam */}
             <motion.path
               d={p.path}
               fill="none"
-              stroke="url(#path-gradient)"
-              strokeWidth="1"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 1, delay: i * 0.5 }}
+              stroke="url(#clean-beam)"
+              strokeWidth="2"
+              strokeLinecap="round"
+              initial={{
+                strokeDasharray: "150 600",
+                strokeDashoffset: 0
+              }}
+              animate={{
+                strokeDashoffset: [0, -750],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "linear",
+                delay: i * 1,
+              }}
             />
 
-            {[p.start, p.end].map((pt: any, idx: number) => (
-              <g key={idx}>
-                <circle cx={pt.x} cy={pt.y} r="2" fill={lineColor} />
-                <circle cx={pt.x} cy={pt.y} r="2" fill={lineColor} opacity="0.5">
-                  <animate
-                    attributeName="r"
-                    from="2"
-                    to="8"
-                    dur="1.5s"
-                    repeatCount="indefinite"
-                  />
-                  <animate
-                    attributeName="opacity"
-                    from="0.5"
-                    to="0"
-                    dur="1.5s"
-                    repeatCount="indefinite"
-                  />
-                </circle>
-              </g>
-            ))}
+            {/* Simple network nodes */}
+            <circle
+              cx={p.start.x}
+              cy={p.start.y}
+              r="1.5"
+              fill={lineColor}
+              fillOpacity="0.6"
+            />
+
+            <circle
+              cx={p.end.x}
+              cy={p.end.y}
+              r="1.5"
+              fill={lineColor}
+              fillOpacity="0.6"
+            />
           </g>
         ))}
       </svg>
