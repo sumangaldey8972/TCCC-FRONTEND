@@ -96,7 +96,12 @@ const BreakingNewsCard = ({ news, onClick, formatDate }: BreakingNewsCardProps) 
                             <button
                                 onClick={(e) => {
                                     e.stopPropagation()
-                                    // Handle share
+                                    const url = `https://thecartel.ai/news-blogs/articles/${news.slug}`;
+                                    const shareText = `🚀 Check out this ${news.category.name.toUpperCase()} news on The Cartel: ${url}`;
+                                    window.open(
+                                        `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`,
+                                        "_blank"
+                                    );
                                 }}
                                 className="p-2 bg-white/20 hover:bg-white/30 rounded-full transition-colors"
                             >
@@ -123,7 +128,7 @@ const BreakingNewsCard = ({ news, onClick, formatDate }: BreakingNewsCardProps) 
                     </button>
                 </div>
             </div>
-        </motion.div>
+        </motion.div >
     )
 }
 

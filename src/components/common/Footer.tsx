@@ -40,9 +40,9 @@ export default function Footer() {
     };
 
     const socialLinks = [
-        { icon: <FaTelegramPlane />, label: "Telegram", href: "#" },
-        { icon: <FaXTwitter />, label: "Twitter", href: "#" },
-        { icon: <FaDiscord />, label: "Discord", href: "#" }
+        { icon: <FaTelegramPlane />, label: "Telegram", href: "https://t.me/thecoin_cartel" },
+        { icon: <FaXTwitter />, label: "Twitter", href: "https://x.com/thecoin_cartel" },
+        // { icon: <FaDiscord />, label: "Discord", href: "#" }
     ];
 
     const exploreLinks = [

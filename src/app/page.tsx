@@ -17,21 +17,21 @@ export default function Home() {
     {
       name: "Telegram",
       icon: <FaTelegramPlane className="w-5 h-5" />,
-      href: "#",
+      href: "https://t.me/thecoin_cartel",
       color: "hover:text-[#0088cc] hover:border-[#0088cc]",
     },
     {
       name: "X",
       icon: <FaXTwitter className="w-5 h-5" />,
-      href: "#",
+      href: "https://x.com/thecoin_cartel",
       color: "hover:text-[#000000] hover:border-[#000000]",
     },
-    {
-      name: "Discord",
-      icon: <FaDiscord className="w-5 h-5" />,
-      href: "#",
-      color: "hover:text-[#5865F2] hover:border-[#5865F2]",
-    }
+    // {
+    //   name: "Discord",
+    //   icon: <FaDiscord className="w-5 h-5" />,
+    //   href: "#",
+    //   color: "hover:text-[#5865F2] hover:border-[#5865F2]",
+    // }
   ];
 
 

@@ -57,57 +57,17 @@ const RightSideNewsSection = () => {
         return formatDate(dateString)
     }
 
-    // Shimmer loading component
-    const NewsShimmer = () => (
-        <div className="space-y-4">
-            {[...Array(4)].map((_, index) => (
-                <div
-                    key={index}
-                    className="relative p-4 bg-gray-800/50 rounded-lg border border-gray-700 animate-pulse"
-                >
-                    <div className="flex items-start space-x-3">
-                        {/* Bullet shimmer */}
-                        <div className="flex-shrink-0 w-2 h-2 mt-2 bg-gray-600 rounded-full"></div>
-
-                        <div className="flex-1 min-w-0 space-y-3">
-                            {/* Title shimmer */}
-                            <div className="space-y-2">
-                                <div className="h-4 bg-gray-600 rounded w-3/4"></div>
-                                <div className="h-4 bg-gray-600 rounded w-1/2"></div>
-                            </div>
-
-                            {/* Meta info shimmer */}
-                            <div className="flex items-center space-x-4">
-                                <div className="flex items-center space-x-1">
-                                    <div className="w-4 h-4 bg-gray-600 rounded"></div>
-                                    <div className="h-3 bg-gray-600 rounded w-16"></div>
-                                </div>
-                                <div className="h-3 bg-gray-600 rounded w-20"></div>
-                            </div>
-                        </div>
-
-                        {/* External link shimmer */}
-                        <div className="flex-shrink-0 w-4 h-4 mt-1 bg-gray-600 rounded"></div>
-                    </div>
-
-                    {/* Shimmer animation overlay */}
-                    <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-gray-700/10 to-transparent"></div>
-                </div>
-            ))}
-        </div>
-    );
-
     return (
         <div className="w-full h-full" >
-            <div className="text-white p-3 bg-text-primary/50   rounded-xl border border-gray-700 shadow-2xl space-y-6">
+            <div className="text-white p-3 bg-text-primary/5  backdrop-blur-xs rounded-xl border border-text-primary/10 shadow-2xl space-y-6">
                 {/* Header */}
                 <div className="flex justify-between items-center">
                     <div className="flex items-center space-x-3">
-                        <h2 className="text-lg font-bold text-background">
+                        <h2 className="text-lg font-bold text-text-primary">
                             Latest News
                         </h2>
                     </div>
-                    <button onClick={() => router.replace("/news-blogs")} className="text-sm group flex items-center space-x-2 text-background/70 hover:text-[#FFD700] transition-all duration-300 font-semibold px-4 py-2 rounded-lg hover:bg-gray-800/50 border border-transparent hover:border-gray-600">
+                    <button onClick={() => router.replace("/news-blogs")} className="backdrop-blur-xs shadow-[0_8px_30px_rgba(0,0,0,0.12)] text-sm group flex items-center space-x-2 text-text-primary/70 hover:text-text-primary transition-all duration-300 font-semibold px-4 py-2 rounded-lg hover:bg-text-primary/10 border border-text-primary/10 hover:border-text-primary/20">
                         <span>View All News</span>
                         <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
                     </button>
@@ -116,21 +76,21 @@ const RightSideNewsSection = () => {
                 {/* News Headlines */}
                 <div className="space-y-4">
                     {loading ? (
-                        <NewsShimmer />
+                        <span className="text-text-primary" >  Loading.... </span>
                     ) : newsData.length > 0 ? (
                         newsData.map((news) => (
                             <div
                                 onClick={() => router.replace(`/news/${news.slug}`)}
                                 key={news.id}
-                                className="group relative p-2 bg-gray-800/50 rounded-lg border border-gray-700 hover:border-[#bf953f]/50 transition-all duration-300 hover:bg-gray-800/70 hover:shadow-lg hover:shadow-[#bf953f]/10 cursor-pointer"
+                                className="group relative p-2 bg-text-primary/10 rounded-lg border border-text-primary/10 hover:border-text-primary/30 transition-all duration-300 hover:bg-text-primary/20 hover:shadow-lg hover:shadow-[#bf953f]/10 cursor-pointer"
                             >
                                 <div className="flex items-start space-x-3">
-                                    <div className="flex-shrink-0 w-2 h-2 mt-2 bg-[#FFD700] rounded-full"></div>
+                                    <div className="flex-shrink-0 w-2 h-2 mt-2 bg-text-primary rounded-full"></div>
                                     <div className="flex-1 min-w-0">
-                                        <h3 className="text-white text-sm font-semibold group-hover:text-[#FFD700] transition-colors duration-300 line-clamp-2">
+                                        <h3 className="text-text-primary/80 text-sm font-semibold group-hover:text-text-primary transition-colors duration-300 line-clamp-2">
                                             {news.heading}
                                         </h3>
-                                        <div className="flex items-center space-x-4 mt-2 text-xs text-gray-400">
+                                        <div className="flex items-center space-x-4 mt-2 text-xs text-text-primary/70">
                                             <span className="flex items-center space-x-1">
                                                 <Calendar size={12} />
                                                 <span>
@@ -149,32 +109,32 @@ const RightSideNewsSection = () => {
                         ))
                     ) : (
                         <div className="text-center py-8">
-                            <div className="text-gray-400 mb-2">No news available</div>
-                            <div className="text-gray-500 text-sm">Check back later for updates</div>
+                            <div className="text-text-primary/70 mb-2">No news available</div>
+                            <div className="text-text-primary/80 text-sm">Check back later for updates</div>
                         </div>
                     )}
                 </div>
 
                 {/* Footer Stats */}
                 <div className="flex items-center justify-between pt-4 border-t border-gray-700">
-                    <div className="flex items-center space-x-6 text-sm text-background/80">
+                    <div className="flex items-center space-x-6 text-sm text-text-primary/80">
                         <span className="flex items-center space-x-2">
-                            <div className={`w-2 h-2 rounded-full animate-pulse ${loading ? 'bg-gray-600' : 'bg-green-400'
+                            <div className={`w-2 h-2 rounded-full animate-pulse ${loading ? 'bg-text-primary/30' : 'bg-green-400'
                                 }`}></div>
                             <span>{loading ? 'Loading...' : 'Live Updates'}</span>
                         </span>
                         <span>•</span>
                         <span>
                             {loading ? (
-                                <div className="h-3 w-20 bg-gray-600 rounded animate-pulse"></div>
+                                <div className="h-3 w-20 bg-text-primary/30 rounded animate-pulse"></div>
                             ) : (
                                 `${newsData.length} breaking stories`
                             )}
                         </span>
                     </div>
-                    <div className="text-xs text-background">
+                    <div className="text-xs text-text-primary/70">
                         {loading ? (
-                            <div className="h-3 w-16 bg-gray-600 rounded animate-pulse"></div>
+                            <div className="h-3 w-16 bg-text-primary/30 rounded animate-pulse"></div>
                         ) : (
                             'Updated just now'
                         )}
