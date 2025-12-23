@@ -54,23 +54,38 @@ export default function Home() {
 
           {/* Left Section – Hero Text */}
           <div className="space-y-6 md:space-y-8">
-            <div>
-              <h1 className="text-5xl font-light leading-tight tracking-tight">
-                <span className="gold-embossed">The Coin Cartel Club —</span>
-                <br />
-                <span className="text-text-primary font-thinner">
-                  Your Gateway to Crypto News, Advertising & Growth
-                </span>
-              </h1>
+            <div className="relative">
+              <div
+                className="
+      backdrop-blur-xs
+      bg-text-primary/5
+      border border-text-primary/10
+      rounded-2xl
+      p-3 md:px-8 md:py-10
+      shadow-[0_8px_30px_rgba(0,0,0,0.12)]
+    "
+              >
+                <div>
+                  <h1 className="text-4xl font-light leading-tight tracking-tight">
+                    <span className="gold-embossed">The Cartel Club —</span>
+                    <br />
+                    <span className="text-3xl text-text-primary/80 font-normal">
+                      Your Gateway to Web3, Blockchain & Decentralized Crypto News,
+                      Advertising, and Growth
+                    </span>
+                  </h1>
+                </div>
+
+                <p className="mt-6 text-xl md:text-2xl text-text-primary/90 leading-relaxed">
+                  Join The Cartel and maximize your reach in the crypto ecosystem.
+                </p>
+
+                <p className="mt-3 text-lg md:text-xl text-text-primary">
+                  Your Gateway to Crypto Media & Market Intelligence.
+                </p>
+              </div>
             </div>
 
-            <p className="text-xl md:text-2xl text-text-primary/90 leading-relaxed">
-              Join the Cartel and maximize your reach in the crypto ecosystem.
-            </p>
-
-            <p className="text-lg md:text-xl text-text-primary">
-              Your Gateway to Crypto Media & Market Intelligence.
-            </p>
 
             <div className="flex flex-row items-stretch sm:items-center gap-4 w-full max-w-2xl">
               <button onClick={() => window.location.replace("/consult-with-us")} className="group relative overflow-hidden px-2 md:px-6 py-2 md:py-4 text-xs md:text-base font-medium bg-text-primary/90 text-background rounded-sm md:rounded-lg transition-all duration-300 ease-out hover:scale-[1.02] active:scale-95 shadow-lg hover:shadow-xl">
